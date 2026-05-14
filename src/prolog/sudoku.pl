@@ -12,7 +12,19 @@
     column/3,
     box_index/3,
     box_cells/3,
-    print_board/1
+    print_board/1,
+    % Constraint layer
+    all_different/1,
+    valid_row/2,
+    valid_col/2,
+    valid_box/2,
+    valid/1,
+    valid_placement/4,
+    candidates/4,
+    empty_cells/2,
+    next_empty/3,
+    solved/1,
+    place/5
 ]).
 
 :- use_module(library(readutil)).
@@ -140,3 +152,95 @@ display_value(Value, Value).
 
 valid_coordinate(Value) :-
     between(1, 9, Value).
+
+% ── Constraint layer ──────────────────────────────────────────────────────────
+
+% all_different(+List)
+% True if all non-zero values in List are distinct.
+% Filters out zeros (empty cells), sorts the rest, and checks for no duplicates.
+all_different(List) :-
+    exclude(=(0), List, NonZero),
+    msort(NonZero, Sorted),
+    \+ (append(_, [X,X|_], Sorted)).
+
+% valid_row(+Board, +RowNumber)
+valid_row(Board, RowNumber) :-
+    row(Board, RowNumber, Values),
+    all_different(Values).
+
+% valid_col(+Board, +ColNumber)
+valid_col(Board, ColNumber) :-
+    column(Board, ColNumber, Values),
+    all_different(Values).
+
+% valid_box(+Board, +BoxIndex)  BoxIndex in 0..8
+valid_box(Board, BoxIndex) :-
+    box_cells(Board, BoxIndex, Values),
+    all_different(Values).
+
+% valid(+Board)
+% Full validity check: every row, column, and box satisfies all_different.
+valid(Board) :-
+    forall(between(1, 9, R), valid_row(Board, R)),
+    forall(between(1, 9, C), valid_col(Board, C)),
+    forall(between(0, 8, B), valid_box(Board, B)).
+
+% valid_placement(+Board, +Row, +Col, +Value)
+% True if placing Value at (Row,Col) does not conflict with any existing
+% value in the same row, column, or 3x3 box.
+% Does NOT require the cell to be empty — callers are responsible for that.
+valid_placement(Board, Row, Col, Value) :-
+    row(Board, Row, RowValues),
+    \+ member(Value, RowValues),
+    column(Board, Col, ColValues),
+    \+ member(Value, ColValues),
+    box_index(Row, Col, BoxIdx),
+    box_cells(Board, BoxIdx, BoxValues),
+    \+ member(Value, BoxValues).
+
+% candidates(+Board, +Row, +Col, -Candidates)
+% Returns the list of values 1-9 that are valid placements at (Row,Col).
+candidates(Board, Row, Col, Candidates) :-
+    findall(
+        Value,
+        (between(1, 9, Value), valid_placement(Board, Row, Col, Value)),
+        Candidates
+    ).
+
+% empty_cells(+Board, -Cells)
+% Returns a list of (Row,Col) pairs for every cell with value 0.
+empty_cells(Board, Cells) :-
+    findall(
+        (R, C),
+        (between(1, 9, R), between(1, 9, C), cell(Board, R, C, 0)),
+        Cells
+    ).
+
+% next_empty(+Board, -Row, -Col)
+% Picks the empty cell with the fewest valid candidates (MRV heuristic).
+% Fails if there are no empty cells.
+next_empty(Board, Row, Col) :-
+    findall(
+        Count-(R, C),
+        (
+            between(1, 9, R),
+            between(1, 9, C),
+            cell(Board, R, C, 0),
+            candidates(Board, R, C, Cands),
+            length(Cands, Count)
+        ),
+        Pairs
+    ),
+    Pairs \= [],
+    msort(Pairs, [_-(Row, Col)|_]).
+
+% solved(+Board)
+% True if the board has no empty cells remaining.
+% Validity is guaranteed by construction when using valid_placement throughout.
+solved(Board) :-
+    \+ member(0, Board).
+
+% place(+Board, +Row, +Col, +Value, -NewBoard)
+% Places Value at (Row,Col). Thin alias over set_cell for solver readability.
+place(Board, Row, Col, Value, NewBoard) :-
+    set_cell(Board, Row, Col, Value, NewBoard).
