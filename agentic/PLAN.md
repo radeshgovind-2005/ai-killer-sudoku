@@ -2,7 +2,7 @@
 
 **Project deadline**: 19 May 2026 at 23:59
 **Plan created**: 2026-05-14
-**Last updated**: 2026-05-14
+**Last updated**: 2026-05-14 (all phases implemented)
 **Scope**: Everything except the written report
 
 ---
@@ -16,11 +16,11 @@
 | `src/python/board.py` | **DONE** — full board utilities mirroring Prolog module |
 | `src/python/puzzles.py` | Placeholder — one path reference only |
 | `data/input/classic_easy_01.txt` | One easy puzzle. Missing: medium, hard, expert, killer |
-| `src/prolog/astar.pl` | Does not exist |
-| `src/prolog/killer_sudoku.pl` | Does not exist |
-| `src/python/sa_solver.py` | Does not exist |
-| `src/python/ga_solver.py` | Does not exist |
-| `scripts/benchmark.sh` | Does not exist |
+| `src/prolog/astar.pl` | **DONE** — heap-based A*, h=empty cells, MRV expansion, closed list, stats |
+| `src/prolog/killer_sudoku.pl` | **DONE** — cage layer, partial pruning, DFID+A* killer variants, easy_01 puzzle |
+| `src/python/sa_solver.py` | **DONE** — box-init state, box-swap operator, stagnation restart, fast cost |
+| `src/python/ga_solver.py` | **DONE** — box-preserving crossover, multi-swap mutation, tournament, elitism |
+| `scripts/benchmark.sh` | **DONE** — runs all 4 solvers on all puzzles, logs to data/output/ |
 
 ---
 
