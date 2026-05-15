@@ -1,0 +1,430 @@
+
+=== GA  puzzle=easy  pop=200  max_gen=5000  runs=3 ===
+  run 1: cost=6  gen=140  time=14.726s
+  run 2: cost=6  gen=78  time=14.617s
+  run 3: cost=6  gen=159  time=14.678s
+  best_fitness=-6
+  best_solution:
+5 3 4 6 7 8 1 9 2
+6 7 2 1 9 5 4 3 8
+1 9 8 3 4 2 5 6 7
+8 5 1 9 6 4 7 2 3
+4 2 6 8 7 3 9 5 1
+7 3 9 5 2 1 8 4 6
+9 6 7 5 3 7 2 8 4
+2 8 3 4 1 9 6 1 5
+4 1 5 2 8 6 3 7 9
+
+=== GA  puzzle=easy  pop=200  max_gen=5000  runs=1 ===
+  run 1: cost=6  gen=140  time=632.291s
+  best_fitness=-6
+  best_solution:
+5 3 4 6 7 8 1 9 2
+6 7 2 1 9 5 4 3 8
+1 9 8 3 4 2 5 6 7
+8 5 1 9 6 4 7 2 3
+4 2 6 8 7 3 9 5 1
+7 3 9 5 2 1 8 4 6
+9 6 7 5 3 7 2 8 4
+2 8 3 4 1 9 6 1 5
+4 1 5 2 8 6 3 7 9
+
+=== GA  puzzle=easy  pop=200  max_gen=10000  runs=3 ===
+  run 1: cost=4  gen=321  time=32.015s
+  run 2: cost=4  gen=41  time=32.126s
+  run 3: cost=2  gen=567  time=31.832s
+  best_fitness=-2
+  best_solution:
+5 3 2 6 7 8 4 1 9
+6 7 4 1 9 5 3 2 8
+1 9 8 3 4 2 5 6 7
+8 1 9 7 6 4 2 5 3
+4 2 6 8 5 3 7 9 1
+7 5 3 9 2 1 8 4 6
+9 6 1 5 3 7 2 8 4
+2 8 7 4 1 9 6 3 5
+3 4 5 2 8 6 1 7 9
+
+=== GA  puzzle=easy  pop=200  max_gen=5000  runs=3 ===
+  run 1: cost=7  gen=872  time=15.652s
+  run 2: SOLVED  gen=3931  time=12.327s
+  run 3: cost=2  gen=145  time=15.679s
+  best_fitness=0
+  best_solution:
+5 3 4 6 7 8 9 1 2
+6 7 2 1 9 5 3 4 8
+1 9 8 3 4 2 5 6 7
+8 5 9 7 6 1 4 2 3
+4 2 6 8 5 3 7 9 1
+7 1 3 9 2 4 8 5 6
+9 6 1 5 3 7 2 8 4
+2 8 7 4 1 9 6 3 5
+3 4 5 2 8 6 1 7 9
+
+=== GA  puzzle=medium  pop=200  max_gen=5000  runs=3 ===
+  run 1: cost=4  gen=925  time=15.705s
+  run 2: cost=8  gen=198  time=15.656s
+  run 3: cost=4  gen=317  time=15.707s
+  best_fitness=-4
+  best_solution:
+5 8 3 9 2 1 6 7 5
+9 6 4 3 7 5 8 2 1
+2 7 1 8 4 6 4 9 3
+4 5 8 1 6 2 9 3 7
+7 2 9 5 3 4 6 1 8
+3 1 6 7 9 8 2 5 4
+1 3 2 6 8 9 5 4 7
+8 4 7 2 5 3 1 6 9
+6 9 5 4 1 7 3 8 2
+
+=== GA  puzzle=hard  pop=200  max_gen=5000  runs=3 ===
+  run 1: cost=6  gen=84  time=15.717s
+  run 2: cost=4  gen=288  time=15.713s
+  run 3: cost=6  gen=130  time=15.715s
+  best_fitness=-4
+  best_solution:
+1 5 6 9 4 7 8 9 3
+2 8 4 2 3 6 1 7 5
+3 7 9 5 8 1 4 2 6
+5 4 2 1 7 8 3 6 9
+6 3 8 9 4 2 5 1 7
+9 1 7 6 5 3 2 4 8
+4 6 3 7 2 5 9 8 1
+8 2 1 3 6 9 7 5 4
+7 9 5 8 1 4 6 3 2
+
+=== GA  puzzle=expert  pop=200  max_gen=5000  runs=3 ===
+  run 1: cost=2  gen=307  time=15.726s
+  run 2: cost=6  gen=289  time=15.705s
+  run 3: cost=7  gen=34  time=15.671s
+  best_fitness=-2
+  best_solution:
+1 8 6 5 3 7 2 9 4
+5 3 4 9 2 1 7 6 8
+7 2 9 6 4 8 5 3 1
+8 7 5 3 6 9 1 4 6
+4 1 3 2 8 5 9 7 2
+6 9 2 1 7 4 8 5 3
+3 6 8 7 9 2 4 1 5
+9 4 1 8 5 3 6 2 7
+2 5 7 4 1 6 3 8 9
+
+=== GA  puzzle=easy  pop=200  max_gen=5000  runs=3 ===
+  run 1: cost=6  gen=140  time=611.066s
+  run 2: cost=6  gen=78  time=619.004s
+  run 3: cost=6  gen=159  time=610.191s
+  best_fitness=-6
+  best_solution:
+5 3 4 6 7 8 1 9 2
+6 7 2 1 9 5 4 3 8
+1 9 8 3 4 2 5 6 7
+8 5 1 9 6 4 7 2 3
+4 2 6 8 7 3 9 5 1
+7 3 9 5 2 1 8 4 6
+9 6 7 5 3 7 2 8 4
+2 8 3 4 1 9 6 1 5
+4 1 5 2 8 6 3 7 9
+
+=== GA  puzzle=easy  pop=200  max_gen=5000  runs=3 ===
+  run 1: cost=6  gen=140  time=628.499s
+  run 2: cost=6  gen=78  time=627.894s
+  run 3: cost=6  gen=159  time=613.018s
+  best_fitness=-6
+  best_solution:
+5 3 4 6 7 8 1 9 2
+6 7 2 1 9 5 4 3 8
+1 9 8 3 4 2 5 6 7
+8 5 1 9 6 4 7 2 3
+4 2 6 8 7 3 9 5 1
+7 3 9 5 2 1 8 4 6
+9 6 7 5 3 7 2 8 4
+2 8 3 4 1 9 6 1 5
+4 1 5 2 8 6 3 7 9
+
+=== GA  puzzle=easy  pop=200  max_gen=5000  runs=3 ===
+  run 1: cost=4  gen=345  time=7.700s
+  run 2: cost=6  gen=31  time=7.759s
+  run 3: SOLVED  gen=3449  time=5.383s
+  best_fitness=0
+  best_solution:
+5 3 4 6 7 8 9 1 2
+6 7 2 1 9 5 3 4 8
+1 9 8 3 4 2 5 6 7
+8 5 9 7 6 1 4 2 3
+4 2 6 8 5 3 7 9 1
+7 1 3 9 2 4 8 5 6
+9 6 1 5 3 7 2 8 4
+2 8 7 4 1 9 6 3 5
+3 4 5 2 8 6 1 7 9
+
+=== GA  puzzle=medium  pop=200  max_gen=5000  runs=3 ===
+  run 1: cost=3  gen=958  time=7.804s
+  run 2: cost=4  gen=86  time=7.803s
+  run 3: cost=2  gen=1159  time=7.806s
+  best_fitness=-2
+  best_solution:
+4 8 3 9 2 1 6 5 7
+9 6 7 3 4 5 8 2 1
+2 5 1 8 7 6 4 9 3
+5 3 8 1 6 2 9 7 4
+7 2 9 5 3 4 1 6 8
+1 4 6 7 9 8 2 3 5
+3 1 2 6 8 9 5 4 7
+8 7 4 2 5 3 6 1 9
+6 9 5 4 1 7 3 8 2
+
+=== GA  puzzle=hard  pop=200  max_gen=5000  runs=3 ===
+  run 1: cost=6  gen=97  time=7.929s
+  run 2: cost=5  gen=547  time=7.901s
+  run 3: cost=6  gen=1929  time=7.917s
+  best_fitness=-5
+  best_solution:
+4 6 7 1 2 9 8 3 5
+9 3 1 5 6 8 7 2 4
+2 5 8 7 3 4 6 9 1
+3 2 1 4 5 7 9 6 8
+6 7 5 9 8 2 4 1 3
+8 4 9 3 1 6 2 5 7
+7 8 2 6 4 3 1 7 9
+5 9 3 2 7 1 5 8 6
+1 6 4 8 9 5 3 4 2
+
+=== GA  puzzle=expert  pop=200  max_gen=5000  runs=3 ===
+  run 1: cost=6  gen=1104  time=7.940s
+  run 2: cost=6  gen=1316  time=7.924s
+  run 3: cost=6  gen=53  time=7.999s
+  best_fitness=-6
+  best_solution:
+1 2 4 8 5 7 6 9 3
+5 3 6 9 2 1 7 4 8
+7 8 9 6 4 3 5 2 1
+2 4 5 3 7 9 1 8 6
+9 1 3 5 8 6 4 7 2
+6 7 8 2 1 4 3 5 9
+3 6 2 7 9 5 8 1 4
+5 4 1 2 3 8 9 6 7
+8 9 7 4 6 1 3 2 5
+
+=== GA  puzzle=easy  pop=200  max_gen=10000  runs=3 ===
+  run 1: cost=4  gen=700  time=15.697s
+  run 2: cost=4  gen=26  time=15.730s
+  run 3: cost=2  gen=88  time=15.755s
+  best_fitness=-2
+  best_solution:
+5 3 4 2 7 6 9 1 8
+6 7 2 1 9 5 3 4 2
+1 9 8 3 4 8 5 6 7
+8 5 9 7 6 1 4 2 3
+4 2 6 8 5 3 7 9 1
+7 1 3 9 2 4 8 5 6
+9 6 1 5 3 7 2 8 4
+2 8 7 4 1 9 6 3 5
+3 4 5 6 8 2 1 7 9
+
+=== GA  puzzle=medium  pop=200  max_gen=10000  runs=3 ===
+  run 1: cost=6  gen=676  time=15.755s
+  run 2: cost=4  gen=125  time=15.779s
+  run 3: cost=4  gen=87  time=15.719s
+  best_fitness=-4
+  best_solution:
+4 8 3 7 2 1 6 9 5
+9 6 7 3 4 5 8 2 1
+2 5 1 8 9 6 4 3 7
+5 4 8 1 3 2 9 7 6
+7 3 2 9 6 4 1 5 8
+1 9 6 7 5 8 2 4 3
+3 7 2 6 8 9 5 1 4
+8 1 4 2 5 3 7 6 9
+6 9 5 4 1 7 3 8 2
+
+=== GA  puzzle=hard  pop=200  max_gen=10000  runs=3 ===
+  run 1: cost=5  gen=5636  time=16.050s
+  run 2: cost=6  gen=52  time=15.946s
+  run 3: cost=6  gen=9770  time=15.909s
+  best_fitness=-5
+  best_solution:
+4 1 7 9 2 6 8 3 5
+2 3 8 1 5 4 7 9 6
+6 5 9 7 3 8 1 4 2
+3 2 1 4 9 5 8 6 7
+7 9 6 3 8 2 4 5 1
+8 4 5 6 1 7 9 2 3
+9 8 2 6 1 3 5 7 4
+5 7 3 2 4 8 6 1 9
+1 6 4 5 7 9 3 2 8
+
+=== GA  puzzle=expert  pop=200  max_gen=10000  runs=3 ===
+  run 1: cost=5  gen=457  time=16.017s
+  run 2: cost=3  gen=361  time=16.109s
+  run 3: cost=2  gen=1528  time=16.059s
+  best_fitness=-2
+  best_solution:
+1 5 2 8 4 7 6 9 3
+4 3 6 9 2 5 1 7 8
+7 8 9 6 3 1 5 2 4
+8 2 5 3 7 9 4 6 1
+9 1 4 5 8 6 7 3 2
+6 7 3 2 1 4 8 5 9
+3 9 8 7 5 4 2 1 6
+5 4 1 2 6 3 9 8 7
+2 6 7 1 9 8 3 4 5
+
+=== GA  puzzle=easy  pop=200  max_gen=10000  runs=3 ===
+  run 1: cost=4  gen=356  time=15.431s
+  run 2: SOLVED  gen=2623  time=4.061s
+  run 3: cost=2  gen=4589  time=15.454s
+  best_fitness=0
+  best_solution:
+5 3 4 6 7 8 9 1 2
+6 7 2 1 9 5 3 4 8
+1 9 8 3 4 2 5 6 7
+8 5 9 7 6 1 4 2 3
+4 2 6 8 5 3 7 9 1
+7 1 3 9 2 4 8 5 6
+9 6 1 5 3 7 2 8 4
+2 8 7 4 1 9 6 3 5
+3 4 5 2 8 6 1 7 9
+
+=== GA  puzzle=medium  pop=200  max_gen=10000  runs=3 ===
+  run 1: cost=6  gen=963  time=15.594s
+  run 2: cost=8  gen=1125  time=15.570s
+  run 3: cost=2  gen=26  time=15.588s
+  best_fitness=-2
+  best_solution:
+4 8 3 9 2 1 6 7 5
+9 6 7 3 4 5 8 2 1
+2 5 1 8 7 6 4 9 3
+5 4 8 1 3 2 9 7 6
+7 2 9 5 6 4 3 1 8
+1 3 6 7 9 8 2 5 4
+3 1 2 6 8 9 5 4 7
+8 7 4 2 5 3 1 6 9
+6 9 5 4 1 7 3 8 2
+
+=== GA  puzzle=hard  pop=200  max_gen=10000  runs=3 ===
+  run 1: cost=8  gen=8864  time=15.841s
+  run 2: cost=8  gen=430  time=15.773s
+  run 3: cost=8  gen=137  time=15.752s
+  best_fitness=-8
+  best_solution:
+4 6 7 1 3 9 8 2 5
+9 3 8 4 5 2 7 1 6
+2 1 5 7 6 8 9 3 4
+8 2 1 9 4 5 3 6 7
+3 7 9 2 8 6 4 5 1
+4 5 6 3 1 7 9 8 2
+7 8 2 6 9 3 5 7 1
+5 9 3 2 7 1 6 4 8
+1 6 4 5 8 4 2 9 3
+
+=== GA  puzzle=expert  pop=200  max_gen=10000  runs=3 ===
+  run 1: cost=4  gen=307  time=15.857s
+  run 2: cost=6  gen=6275  time=15.810s
+  run 3: cost=7  gen=95  time=15.754s
+  best_fitness=-4
+  best_solution:
+1 5 6 4 3 7 2 9 1
+7 3 8 9 2 5 4 6 8
+4 2 9 6 1 8 5 7 3
+2 8 5 3 7 9 1 4 6
+9 1 4 5 8 6 7 3 2
+6 7 3 1 2 4 9 8 5
+3 9 2 7 5 6 8 1 4
+8 4 1 2 9 3 6 5 7
+5 6 7 8 4 1 3 2 9
+
+=== GA  puzzle=killer  pop=200  max_gen=10000  runs=3 ===
+  run 1: cost=15  gen=579  time=25.231s
+  run 2: cost=4  gen=4859  time=25.521s
+  run 3: cost=10  gen=1584  time=25.958s
+  best_fitness=-4
+  best_solution:
+8 1 3 2 6 9 7 4 5
+2 9 4 7 3 5 6 8 1
+7 5 6 1 4 8 3 9 2
+9 8 5 6 1 7 4 2 3
+6 4 2 5 8 3 9 1 7
+3 7 1 4 9 2 5 6 8
+5 3 8 9 2 4 1 7 6
+4 6 7 8 5 1 2 3 9
+1 2 9 3 7 6 8 5 4
+
+=== GA  puzzle=easy  pop=200  max_gen=10000  runs=3 ===
+  run 1: cost=8  gen=36  time=15.620s
+  run 2: cost=6  gen=768  time=15.619s
+  run 3: cost=6  gen=208  time=15.643s
+  best_fitness=-6
+  best_solution:
+5 3 1 2 7 6 4 9 8
+6 4 2 1 9 5 3 1 7
+7 9 8 3 4 8 5 6 2
+8 1 5 9 6 4 7 2 3
+4 2 6 8 5 3 9 5 1
+7 9 3 7 2 1 8 4 6
+1 6 9 5 3 7 2 8 4
+2 8 7 4 1 9 6 3 5
+3 5 4 6 8 2 1 7 9
+
+=== GA  puzzle=medium  pop=200  max_gen=10000  runs=3 ===
+  run 1: cost=2  gen=183  time=16.673s
+  run 2: cost=4  gen=45  time=16.691s
+  run 3: cost=4  gen=59  time=16.691s
+  best_fitness=-2
+  best_solution:
+4 8 3 9 2 1 6 5 7
+9 6 7 3 4 5 8 2 1
+2 5 1 8 7 6 4 9 3
+5 3 8 1 6 2 9 7 4
+7 2 9 5 3 4 6 1 8
+1 4 6 7 9 8 2 3 5
+3 1 2 6 8 9 5 4 7
+8 7 4 2 5 3 1 6 9
+6 9 5 4 1 7 3 8 2
+
+=== GA  puzzle=hard  pop=200  max_gen=10000  runs=3 ===
+  run 1: cost=4  gen=472  time=15.902s
+  run 2: cost=6  gen=1106  time=15.897s
+  run 3: cost=4  gen=928  time=15.909s
+  best_fitness=-4
+  best_solution:
+4 5 7 9 3 2 8 1 5
+2 3 9 8 6 1 6 4 7
+6 8 1 7 4 5 9 2 3
+7 2 8 4 5 9 3 6 1
+9 1 6 3 8 7 4 5 2
+3 4 5 2 1 6 7 8 9
+8 9 2 6 1 3 5 7 4
+5 6 3 2 7 4 1 9 8
+1 7 4 5 9 8 2 3 6
+
+=== GA  puzzle=expert  pop=200  max_gen=10000  runs=3 ===
+  run 1: cost=5  gen=9058  time=15.827s
+  run 2: cost=8  gen=44  time=15.833s
+  run 3: cost=4  gen=97  time=15.762s
+  best_fitness=-4
+  best_solution:
+1 5 2 8 3 7 4 9 6
+6 3 4 9 2 5 1 7 8
+7 8 9 6 4 1 5 2 3
+4 7 5 3 1 9 6 8 4
+9 1 3 2 8 6 7 5 2
+6 2 8 7 5 4 9 3 1
+3 9 6 4 7 8 2 1 5
+2 4 1 5 9 3 8 6 7
+5 8 7 1 6 2 3 4 9
+
+=== GA  puzzle=killer  pop=200  max_gen=10000  runs=3 ===
+  run 1: cost=17  gen=657  time=26.014s
+  run 2: cost=21  gen=5133  time=26.023s
+  run 3: cost=15  gen=1398  time=25.907s
+  best_fitness=-15
+  best_solution:
+6 2 8 9 7 5 1 4 7
+1 9 7 8 3 4 2 5 8
+3 5 4 2 6 1 3 9 6
+7 4 2 1 5 8 9 6 3
+5 1 6 4 9 3 8 7 2
+8 3 9 7 2 6 4 1 5
+9 6 1 5 8 2 7 3 1
+4 8 5 3 4 7 6 2 9
+2 7 3 6 1 9 5 8 4
