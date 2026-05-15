@@ -39,15 +39,15 @@ import random
 import time
 from pathlib import Path
 
-from board import Board, load_board, print_board, format_board, BOARD_SIZE, BOX_SIZE
-from puzzles import PUZZLES, OUTPUT_DIR
+from board import Board, Cage, load_board, load_killer_puzzle, print_board, format_board, BOARD_SIZE, BOX_SIZE
+from puzzles import PUZZLES, KILLER_PUZZLES, OUTPUT_DIR
 from sa_solver import get_givens, initialize, cost
 
 
 # ── GA operators ───────────────────────────────────────────────────────────────
 
-def fitness(board: Board) -> int:
-    return -cost(board)
+def fitness(board: Board, cages: list[Cage] | None = None) -> int:
+    return -cost(board, cages)
 
 
 def tournament_select(population: list[Board], fitnesses: list[int], k: int = 3) -> Board:
@@ -102,11 +102,12 @@ def genetic_algorithm(
     max_gen: int = 10000,
     mutation_rate: float = 0.25,
     elite: int = 2,
-    stagnation_limit: int = 400,
+    stagnation_limit: int = 2000,
+    cages: list[Cage] | None = None,
 ) -> tuple[Board, int, int]:
     """Run GA. Returns (best_board, generation_found, best_fitness)."""
     population = [initialize(board, givens) for _ in range(pop_size)]
-    fitnesses = [fitness(b) for b in population]
+    fitnesses = [fitness(b, cages) for b in population]
 
     best_idx = max(range(pop_size), key=lambda i: fitnesses[i])
     best_board = list(population[best_idx])
@@ -131,7 +132,7 @@ def genetic_algorithm(
             new_population.append(child)
 
         population = new_population
-        fitnesses = [fitness(b) for b in population]
+        fitnesses = [fitness(b, cages) for b in population]
 
         gen_best_idx = max(range(pop_size), key=lambda i: fitnesses[i])
         gen_best_fit = fitnesses[gen_best_idx]
@@ -149,7 +150,7 @@ def genetic_algorithm(
             saved = list(best_board)
             population = [initialize(board, givens) for _ in range(pop_size - 1)]
             population.append(saved)
-            fitnesses = [fitness(b) for b in population]
+            fitnesses = [fitness(b, cages) for b in population]
             stagnation = 0
 
     return best_board, best_gen, best_fit
@@ -175,7 +176,11 @@ def main() -> None:
         random.seed(args.seed)
 
     path = PUZZLES[args.puzzle]
-    board = load_board(path)
+    if args.puzzle in KILLER_PUZZLES:
+        board, cages = load_killer_puzzle(path)
+    else:
+        board, cages = load_board(path), None
+
     givens = get_givens(board)
 
     print(f"Puzzle ({args.puzzle}):")
@@ -189,6 +194,7 @@ def main() -> None:
             board, givens,
             pop_size=args.pop,
             max_gen=args.generations,
+            cages=cages,
         )
         elapsed = time.perf_counter() - t0
 
