@@ -4,10 +4,16 @@ The file format is shared with the Prolog implementation:
 - 9 lines with 9 characters each
 - digits 1-9 for fixed values
 - 0 or . for empty cells
+
+Killer Sudoku format (load_killer_puzzle):
+- Optional % comment lines
+- 9 board rows (digits/dots)
+- cage(Sum,[(R1,C1),(R2,C2),...]).  lines
 """
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 from typing import Iterable
 
@@ -15,6 +21,9 @@ BOARD_SIZE = 9
 BOX_SIZE = 3
 BOARD_LENGTH = BOARD_SIZE * BOARD_SIZE
 Board = list[int]
+
+# A cage is (target_sum, [(row, col), ...]) — rows and cols are 1-indexed.
+Cage = tuple[int, list[tuple[int, int]]]
 
 
 def empty_board() -> Board:
@@ -127,3 +136,59 @@ def _validate_coordinate(value: int) -> None:
 def _validate_value(value: int) -> None:
     if not isinstance(value, int) or not 0 <= value <= 9:
         raise ValueError("Cell values must be integers between 0 and 9.")
+
+
+def load_killer_puzzle(path: str | Path) -> tuple[Board, list[Cage]]:
+    """Parse a Killer Sudoku file into (board, cages).
+
+    File format (same as killer_easy_01.txt):
+        % optional comment lines
+        000000000       <- 9 board rows; 0 or . means empty cell
+        ...
+        cage(12,[(1,1),(1,2),(1,3)]).
+        ...
+
+    Returns:
+        board  — flat 81-element list (0 = empty / no givens for pure killer)
+        cages  — list of (target_sum, [(row, col), ...]) with 1-based indices
+    """
+    text = Path(path).read_text(encoding="utf-8")
+    board_lines: list[str] = []
+    cages: list[Cage] = []
+
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("%"):
+            continue
+        m = re.match(r"cage\((\d+),\s*\[([^\]]+)\]\)", stripped.rstrip("."))
+        if m:
+            target = int(m.group(1))
+            cells = [
+                (int(r), int(c))
+                for r, c in re.findall(r"\((\d+),\s*(\d+)\)", m.group(2))
+            ]
+            cages.append((target, cells))
+        elif re.match(r"^[\d.]+$", stripped):
+            board_lines.append(stripped)
+
+    board = board_from_string("\n".join(board_lines[:BOARD_SIZE]))
+    return board, cages
+
+
+def cage_cost(board: Board, cages: list[Cage]) -> int:
+    """Count cage constraint violations on a complete board.
+
+    Per cage:
+      +1 if the sum of cage values != target sum
+      +(len - len(set)) for duplicate values within the cage
+
+    Box constraints are always satisfied by construction (box-swap operator),
+    so this only needs to check cage-specific rules on top of row/column cost.
+    """
+    violations = 0
+    for target, cells in cages:
+        vals = [board[(r - 1) * BOARD_SIZE + (c - 1)] for r, c in cells]
+        if sum(vals) != target:
+            violations += 1
+        violations += len(vals) - len(set(vals))
+    return violations

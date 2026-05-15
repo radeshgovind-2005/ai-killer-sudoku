@@ -10,10 +10,15 @@ CLASSIC_EASY_01 = INPUT_DIR / "classic_easy_01.txt"
 CLASSIC_MEDIUM_01 = INPUT_DIR / "classic_medium_01.txt"
 CLASSIC_HARD_01 = INPUT_DIR / "classic_hard_01.txt"
 CLASSIC_EXPERT_01 = INPUT_DIR / "classic_expert_01.txt"
+KILLER_EASY_01 = INPUT_DIR / "killer_easy_01.txt"
 
 PUZZLES = {
     "easy": CLASSIC_EASY_01,
     "medium": CLASSIC_MEDIUM_01,
     "hard": CLASSIC_HARD_01,
     "expert": CLASSIC_EXPERT_01,
+    "killer": KILLER_EASY_01,
 }
+
+# Puzzles that use the killer format (board + cages)
+KILLER_PUZZLES = {"killer"}
