@@ -216,3 +216,19 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# macOS
+.DS_Store
+
+# LaTeX build artifacts
+docs/report/*.aux
+docs/report/*.bbl
+docs/report/*.blg
+docs/report/*.fdb_latexmk
+docs/report/*.fls
+docs/report/*.lot
+docs/report/*.out
+docs/report/*.run.xml
+docs/report/*.synctex.gz
+docs/report/*.toc
+docs/report/*-blx.bib
