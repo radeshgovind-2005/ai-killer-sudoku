@@ -38,18 +38,30 @@ import argparse
 import random
 import time
 
-from board import Board, Cage, load_board, load_killer_puzzle, print_board, format_board, BOARD_SIZE, BOX_SIZE
+from board import (
+    Board,
+    Cage,
+    load_board,
+    load_killer_puzzle,
+    print_board,
+    format_board,
+    BOARD_SIZE,
+    BOX_SIZE,
+)
 from puzzles import PUZZLES, KILLER_PUZZLES, OUTPUT_DIR
 from sa_solver import get_givens, initialize, cost
 
 
 # ── GA operators ───────────────────────────────────────────────────────────────
 
+
 def fitness(board: Board, cages: list[Cage] | None = None) -> int:
     return -cost(board, cages)
 
 
-def tournament_select(population: list[Board], fitnesses: list[int], k: int = 3) -> Board:
+def tournament_select(
+    population: list[Board], fitnesses: list[int], k: int = 3
+) -> Board:
     contestants = random.sample(range(len(population)), k)
     winner = max(contestants, key=lambda i: fitnesses[i])
     return population[winner]
@@ -58,8 +70,11 @@ def tournament_select(population: list[Board], fitnesses: list[int], k: int = 3)
 def _box_indices(box: int) -> list[int]:
     sr = (box // BOX_SIZE) * BOX_SIZE
     sc = (box % BOX_SIZE) * BOX_SIZE
-    return [sr * BOARD_SIZE + r * BOARD_SIZE + sc + c
-            for r in range(BOX_SIZE) for c in range(BOX_SIZE)]
+    return [
+        sr * BOARD_SIZE + r * BOARD_SIZE + sc + c
+        for r in range(BOX_SIZE)
+        for c in range(BOX_SIZE)
+    ]
 
 
 def crossover(parent1: Board, parent2: Board, givens: frozenset[int]) -> Board:
@@ -93,6 +108,7 @@ def mutate(board: Board, givens: frozenset[int], swaps: int = 2) -> Board:
 
 
 # ── Core algorithm ─────────────────────────────────────────────────────────────
+
 
 def genetic_algorithm(
     board: Board,
@@ -157,18 +173,27 @@ def genetic_algorithm(
 
 # ── CLI ────────────────────────────────────────────────────────────────────────
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Genetic Algorithm Sudoku solver")
-    parser.add_argument("--puzzle", choices=list(PUZZLES), default="easy",
-                        help="Puzzle difficulty (default: easy)")
-    parser.add_argument("--pop", type=int, default=200,
-                        help="Population size (default: 200)")
-    parser.add_argument("--generations", type=int, default=10000,
-                        help="Max generations (default: 5000)")
-    parser.add_argument("--runs", type=int, default=1,
-                        help="Number of independent runs (default: 1)")
-    parser.add_argument("--seed", type=int, default=None,
-                        help="Random seed for reproducibility")
+    parser.add_argument(
+        "--puzzle",
+        choices=list(PUZZLES),
+        default="easy",
+        help="Puzzle difficulty (default: easy)",
+    )
+    parser.add_argument(
+        "--pop", type=int, default=200, help="Population size (default: 200)"
+    )
+    parser.add_argument(
+        "--generations", type=int, default=10000, help="Max generations (default: 5000)"
+    )
+    parser.add_argument(
+        "--runs", type=int, default=1, help="Number of independent runs (default: 1)"
+    )
+    parser.add_argument(
+        "--seed", type=int, default=None, help="Random seed for reproducibility"
+    )
     args = parser.parse_args()
 
     if args.seed is not None:
@@ -190,7 +215,8 @@ def main() -> None:
     for run in range(1, args.runs + 1):
         t0 = time.perf_counter()
         best, best_gen, best_fit = genetic_algorithm(
-            board, givens,
+            board,
+            givens,
             pop_size=args.pop,
             max_gen=args.generations,
             cages=cages,
@@ -214,7 +240,9 @@ def main() -> None:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     log_path = OUTPUT_DIR / "ga_results.txt"
     with log_path.open("a") as f:
-        f.write(f"\n=== GA  puzzle={args.puzzle}  pop={args.pop}  max_gen={args.generations}  runs={args.runs} ===\n")
+        f.write(
+            f"\n=== GA  puzzle={args.puzzle}  pop={args.pop}  max_gen={args.generations}  runs={args.runs} ===\n"
+        )
         for i, (solved, bf, bg, elapsed, _) in enumerate(results, 1):
             status = "SOLVED" if solved else f"cost={-bf}"
             f.write(f"  run {i}: {status}  gen={bg}  time={elapsed:.3f}s\n")
