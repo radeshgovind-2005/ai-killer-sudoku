@@ -30,8 +30,9 @@ import random
 import time
 from pathlib import Path
 
-from board import Board, load_board, print_board, format_board, BOARD_SIZE, BOX_SIZE
-from puzzles import PUZZLES, OUTPUT_DIR
+from board import (Board, Cage, load_board, load_killer_puzzle, cage_cost,
+                   print_board, format_board, BOARD_SIZE, BOX_SIZE)
+from puzzles import PUZZLES, KILLER_PUZZLES, OUTPUT_DIR
 
 
 # ── Helpers ────────────────────────────────────────────────────────────────────
@@ -62,11 +63,13 @@ def initialize(board: Board, givens: frozenset[int]) -> Board:
     return result
 
 
-def cost(board: Board) -> int:
-    """Count row + column duplicate violations using direct list slicing.
+def cost(board: Board, cages: list[Cage] | None = None) -> int:
+    """Count constraint violations on a complete board.
 
-    Boxes are always satisfied by construction (box-swap operator), so they
-    contribute 0 and are not checked here.
+    Always counts row + column duplicate violations (boxes are always satisfied
+    by construction thanks to the box-swap operator).  When cages are provided
+    (Killer Sudoku mode), cage sum and intra-cage uniqueness violations are
+    added on top.
     """
     violations = 0
     for i in range(BOARD_SIZE):
@@ -74,6 +77,8 @@ def cost(board: Board) -> int:
         col_vals = board[i::BOARD_SIZE]
         violations += BOARD_SIZE - len(set(row_vals))
         violations += BOARD_SIZE - len(set(col_vals))
+    if cages:
+        violations += cage_cost(board, cages)
     return violations
 
 
@@ -102,22 +107,28 @@ def simulated_annealing(
     T_init: float = 2.0,
     cooling: float = 0.9999,
     T_min: float = 0.001,
-    max_stagnation: int = 1500,
+    max_iterations: int = 300_000,
+    cages: list[Cage] | None = None,
 ) -> tuple[Board, int, int]:
-    """Run SA. Returns (best_board, final_cost, total_iterations)."""
+    """Run SA. Returns (best_board, final_cost, total_iterations).
+
+    Each natural cooling run goes from T_init to T_min (~76 k steps at the
+    default cooling rate).  When a run exhausts without finding a solution the
+    board is reinitialised and temperature is reset to T_init so the next run
+    gets a fresh full annealing schedule.  max_iterations caps the total number
+    of steps across all restarts.
+    """
     current = initialize(board, givens)
-    current_cost = cost(current)
+    current_cost = cost(current, cages)
     best = list(current)
     best_cost = current_cost
 
     T = T_init
     iterations = 0
-    stagnation = 0
-    restarts = 0
 
-    while T > T_min and best_cost > 0:
+    while best_cost > 0 and iterations < max_iterations:
         candidate = neighbour(current, givens)
-        candidate_cost = cost(candidate)
+        candidate_cost = cost(candidate, cages)
         delta = candidate_cost - current_cost
 
         if delta < 0 or random.random() < math.exp(-delta / T):
@@ -126,21 +137,15 @@ def simulated_annealing(
             if current_cost < best_cost:
                 best = list(current)
                 best_cost = current_cost
-                stagnation = 0
-            else:
-                stagnation += 1
-        else:
-            stagnation += 1
-
-        if stagnation >= max_stagnation:
-            restarts += 1
-            current = initialize(board, givens)
-            current_cost = cost(current)
-            T = T_init * (0.5 ** restarts)  # each reheat starts cooler
-            stagnation = 0
 
         T *= cooling
         iterations += 1
+
+        # Natural run complete: restart from scratch for another full schedule.
+        if T < T_min and best_cost > 0:
+            current = initialize(board, givens)
+            current_cost = cost(current, cages)
+            T = T_init
 
     return best, best_cost, iterations
 
@@ -161,7 +166,11 @@ def main() -> None:
         random.seed(args.seed)
 
     path = PUZZLES[args.puzzle]
-    board = load_board(path)
+    if args.puzzle in KILLER_PUZZLES:
+        board, cages = load_killer_puzzle(path)
+    else:
+        board, cages = load_board(path), None
+
     givens = get_givens(board)
 
     print(f"Puzzle ({args.puzzle}):")
@@ -171,7 +180,7 @@ def main() -> None:
     results = []
     for run in range(1, args.runs + 1):
         t0 = time.perf_counter()
-        best, final_cost, iters = simulated_annealing(board, givens)
+        best, final_cost, iters = simulated_annealing(board, givens, cages=cages)
         elapsed = time.perf_counter() - t0
 
         solved = final_cost == 0
