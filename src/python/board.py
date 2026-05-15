@@ -22,13 +22,17 @@ def empty_board() -> Board:
 
 
 def is_valid_board(board: Board) -> bool:
-    return len(board) == BOARD_LENGTH and all(isinstance(value, int) and 0 <= value <= 9 for value in board)
+    return len(board) == BOARD_LENGTH and all(
+        isinstance(value, int) and 0 <= value <= 9 for value in board
+    )
 
 
 def board_from_rows(rows: Iterable[Iterable[int]]) -> Board:
     flat_board = [value for row in rows for value in row]
     if not is_valid_board(flat_board):
-        raise ValueError("Board must contain exactly 81 integer values between 0 and 9.")
+        raise ValueError(
+            "Board must contain exactly 81 integer values between 0 and 9."
+        )
     return flat_board
 
 
@@ -71,7 +75,9 @@ def row(board: Board, row_number: int) -> list[int]:
 def column(board: Board, col_number: int) -> list[int]:
     _validate_coordinate(col_number)
     _validate_board(board)
-    return [cell(board, row_number, col_number) for row_number in range(1, BOARD_SIZE + 1)]
+    return [
+        cell(board, row_number, col_number) for row_number in range(1, BOARD_SIZE + 1)
+    ]
 
 
 def box_index(row: int, col: int) -> int:
@@ -108,7 +114,9 @@ def print_board(board: Board) -> None:
 
 def _validate_board(board: Board) -> None:
     if not is_valid_board(board):
-        raise ValueError("Board must contain exactly 81 integer values between 0 and 9.")
+        raise ValueError(
+            "Board must contain exactly 81 integer values between 0 and 9."
+        )
 
 
 def _validate_coordinate(value: int) -> None:
