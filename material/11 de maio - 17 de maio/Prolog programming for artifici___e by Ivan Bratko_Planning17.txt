@@ -1,0 +1,3 @@
+Search for word [HERE] 
+
+in dump_means_ends_planner_WITH_DEBUG.txt
