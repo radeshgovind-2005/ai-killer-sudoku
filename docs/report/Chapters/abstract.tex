@@ -1,9 +1,3 @@
 \abstractEN % Do NOT modify this line
 
-The report must contain two versions of the abstract, one in the same language as the main text and another in a different language. The package assumes the two languages under consideration are always Portuguese and English. 
-
-The abstract is critical because many researchers will read only that part. Your abstract should provide an accurate and sufficiently detailed summary of your work so that readers will understand what you did, why you did it, what your findings are, and why your results are valuable and essential. 
-
-The abstract should not contain bibliography citations, tables, charts or diagrams. Abbreviations should be limited. Abbreviations defined in the abstract must be explained again at first use in the main text. 
-
-Finally, you must avoid the use of expressions such as "The present work deals with ($\ldots$) ", "The document concludes that ($\ldots$) ", "apparently and ($\ldots$) ", etc. The word limit should be observed; 150 words is the limit.
+This work presents four automatic solvers for the classic Sudoku puzzle and its Killer Sudoku variant. In Prolog, depth-first iterative deepening (DFID) and A* were implemented, both with the minimum remaining values (MRV) heuristic. In Python, simulated annealing (SA) and a genetic algorithm (GA) were implemented using a within-box swap representation. All solvers were extended to support Killer Sudoku cage constraints. Experimental results show that DFID with MRV solves all instances in under four seconds. A* expands more nodes on puzzles with high degrees of freedom. SA reliably solves easy and medium instances but occasionally gets trapped in local minima at cost two. The GA suffers from premature convergence and does not find complete solutions within the tested parameter limits.

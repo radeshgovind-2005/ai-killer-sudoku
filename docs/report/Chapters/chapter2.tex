@@ -1,169 +1,173 @@
-% 
-%  chapter2.tex
-%  ReportISEL
-%  
-%  Created by Matilde Pós-de-Mina Pato on 2012/10/09.
 %
-\chapter{Manual do utilizador}
-\label{cha:users_manual}
-
-% ================
-% = Introduction =
-% ================
-\section{Introdução} % (fold)
-\label{sec:introduction}
-Este documento reutiliza algumas partes do \textit{template} criado para a escrita da Dissertação/Trabalho de Projecto de Mestrado de MEIC. Por ser meramente informativo, o resto do documento encontra-se escrito na lingua inglesa.
-
-% section introduction (end)
-
-% ====================
-% = Folder Structure =
-% ====================
-\section{Folder Structure} % (fold)
-\label{sec:folder_structure}
-
-The template file for writing dissertations in  \texttt{LaTeX} is organized into a main directory, a set of files and sub-directories. \textbf{reportisel}  is the main directory and includes:
-	\begin{description}
-		\item[Logo] Directory with Faculty logos;
-		\item[Chapters] Directory where to put user files (text and figures);
-		\begin{description}
-		\item[scripts] Directory with useful bash scripts, e.g., for cleaning all temporary files;
-		\item[img] Directory with all images to use in the chapters, e.g. \texttt{ra-raster.png};
-		\end{description}
-		\item[alpha-pt.bst] A file with bibliography names in portuguese, e.g., 'Relatório Técnico'. This file is used automatically if Portuguese is selected as the main language (see below);
-		\item[defaults.tex] A file with the main default values for the package (institution name, faculty's logo, degree name and similars - {\color{red}{TO CHANGE BY THE USER}});
-		\item[personaldataofreport.tex] A file with the main default values for the package (identification of report as well as the author and juries - {\color{red}{TO CHANGE BY THE USER}});
-		\item[template.tex] The main file. You should run  \texttt{LaTeX} in this one. Please refrain from changing the file content outside of the well defined area;
-		\item[bibliography.bib] The bib file. An easy way to find to import citation into \texttt{bibtex} is select option \texttt{Show links to import citation into \texttt{BibTex}} in \href{http://scholar.google.pt/scholar_settings?hl=en&as_sdt=0,5}{\texttt{Scholar google settings}}.
-		\item[reportisel.cls] The  \texttt{LaTeX} class file for the thesis{} style. Currently, some of the defaults are stored here instead of \verb!defaults.tex!. This file should not be changed, unless you're ready to play with fire! :) - {\color{red}{DO NOT CHANGE}});
-	\end{description}
-
-Again, we would like to recall that all the user \texttt{LaTeX} files should be stored in the \verb!reportisel! directory, and all the images in \verb!reportisel/Chapters/img! directory.\todo[inline]{Yet another note!}
-% section folder_structure (end)
-
-% ===================
-% = Package options =
-% ===================
-\section{Package Options} % (fold)
-\label{sec:package_options}
-
-The thesis{} style includes the following options, that must be included in the options list in the \verb!\documentclass[options]{reportisel}! line at the top of the \texttt{template.tex} file.
-
-The list below aggregates related options in a single item. For each list, the default value is prefixed with a *.
-
-\subsection{Language Related Options} % (fold)
-\label{sub:language_related_options}
-
-You must choose the main language for the document. The available options are:
-
-\begin{enumerate}
-	\item \textbf{*pt} --- The text is written in Portuguese (with a small abstract in English).
-	\item \textbf{en} --- The text is written in English (with a small abstract in Portuguese).
-\end{enumerate}
-
-The language option affects:
-\begin{itemize}
-	\item \textbf{The order of the summaries.} At first the abstract in the main language and then in the foreign language. This means that if your main language for the document in english, you will see first the abstract (in english) and then the 'resumo' (in portuguese). If you switch the main language for the document, it will also automatically switch the order of the summaries.
-	\item \textbf{The names for document sectioning.} E.g., 'Chapter' vs.\ 'Capítulo', 'Table of Contents' vs.\ 'Índice', 'Figure' vs.\ 'Figura', etc.
-	\item \textbf{The type of documents in the bibliography.} E.g., 'Technical Report' vs.\ 'Relatório Técnico'.
-\end{itemize} 
-
-No mater which language you chose, you will always have the appropriate hyphenation rules according to the language at that point. You always get portuguese hyphenation rules in the 'Resumo', english hyphenation rules in the 'Abstract', and then the main language hyphenation rules for the rest of the document. If you need to force hyphenation write inside of \verb!\hyphenation{}! the hyphenated word, e.g. \verb!\hyphenation{op-ti-cal net-works}!.
-% section package_options (end)
-
-\subsection{Class of Text} % (fold)
-\label{sub:class_of_text}
-
-You must choose the class of text for the document. The available options are:
-
-\begin{enumerate}
-	\item \textbf{rpt} --- BSc report.
-	\item \textbf{preprpt} --- Preparation of Bsc report. This is a preliminary report graduate students at ISEL/IPL must prepare to conclude the first semester.
-\end{enumerate}
-%% subsection class_of_text (end)
+%  chapter2.tex  —  Formulação do Problema e Implementação
 %
-%% ============
-%% = Printing =
-%% ============
-\subsection{Printing} % (fold)
-\label{sub:printing}
+\chapter{Formulação do Problema e Implementação}
+\label{cha:formulacao}
 
-You must choose how your document will be printed. The available options are:
-\begin{enumerate}
-	\item \textbf{oneside} --- Single side page printing.
-	\item \textbf{*twoside} --- Double sided page printing.
-\end{enumerate}
-% subsection printing (end)
+\section{Representação do Estado}
+\label{sec:representacao}
 
-% =============
-% = Font Size =
-% =============
-\subsection{Font Size} % (fold)
-\label{ssec:font_size}
+\subsection{Sudoku Clássico}
+\label{ssec:rep_classico}
 
-You must select the encoding for your text. The available options are:
-\begin{enumerate}
-	\item \textbf{11pt} --- Eleven (11) points font size.
-	\item \textbf{*12pt} --- Twelve (12) points font size. You should really stick to 12pt\ldots
-\end{enumerate}
-% subsection font_size (end)
+A grelha $9 \times 9$ é representada como uma lista plana de 81 inteiros, indexada linha a linha (da esquerda para a direita, de cima para baixo). O índice plano de uma célula na linha $r$ e coluna $c$ (ambas de base 1) é dado por $(r-1) \times 9 + (c-1)$. Uma célula vazia é representada pelo valor $0$; as células preenchidas pelo puzzle (\emph{givens}) têm valores de 1 a 9.
 
-% =================
-% = Text encoding =
-% =================
-\subsection{Text Encoding} % (fold)
-\label{ssec:text_encoding}
+Esta representação plana permite calcular as coordenadas de linha, coluna e caixa sem estruturas de dados auxiliares. O índice da caixa de uma célula $(r, c)$ é $\lfloor(r-1)/3\rfloor \times 3 + \lfloor(c-1)/3\rfloor$.
 
-You must choose the font size for your document. The available options are:
-\begin{enumerate}
-	\item \textbf{latin1} --- Use Latin-1 (\href{http://en.wikipedia.org/wiki/ISO/IEC_8859-1}{ISO 8859-1}) encoding.  Most probably you should use this option if you use Windows;
-	\item \textbf{utf8} --- Use \href{http://en.wikipedia.org/wiki/UTF-8}{UTF8} encoding.    Most probably you should use this option if you are not using Windows.
-\end{enumerate}
-% subsection font_size (end)
-
-% ============
-% = Examples =
-% ============
-\subsection{Examples} % (fold)
-\label{ssec:examples}
-
-Let's have a look at a couple of examples:
-
+Em Prolog, os predicados fundamentais são:
 \begin{itemize}
-	\item Preparation of report document, in portuguese, with 12pt size, to be printed twoside sided  and to be read on screen
-	\begin{lstlisting}[language=myLatex]
-	\documentclass[
-		preprpt,	% (*)rpt, preprpt - Technical Report or PrepTechnical Report
-		pt,	% (*)pt, en - languages 
-		twoside,	% (*)twoside, oneside - single or double sided printing
-		12pt,	% (*)12pt, 11pt, 10pt - use font size
-		a4paper,	% Paper size/format
-		utf8,		% (*)utf8, latin1 - Text encoding: Linux, Mac or Windows
-		onscreen,	% (*)onscreen, onpaper - Page layout: screen versus paper print
-		hyperref = true,  % (*)true, false - Hyperlinks in citations
-		listof = totoc	% Print all entries in table of contents
-	]{reportisel} 
-	\end{lstlisting}
-	\item Report, in english, with 12pt size and to be printed one sided (I wonder why one would do this!), in paper
-	\begin{lstlisting}[language=myLatex]
-	\documentclass[
-		rpt,	% (*)rpt, preprpt - Technical Report or PrepTechnical Report
-		pt,	% (*)pt, en - languages 
-		oneside,	% (*)twoside, oneside - single or double sided printing
-		12pt,	% (*)12pt, 11pt, 10pt - use font size
-		a4paper,	% Paper size/format
-		utf8,		% (*)utf8, latin1 - Text encoding: Linux, Mac or Windows
-		onpaper,	% (*)onscreen, onpaper - Page layout: screen versus paper print
-		hyperref = true,  % (*)true, false - Hyperlinks in citations
-		listof = totoc	% Print all entries in table of contents
-	]{reportisel} 
-	\end{lstlisting}
+    \item \texttt{all\_different/1} — verifica que uma lista não contém duplicados;
+    \item \texttt{valid/1} — verifica que todas as linhas, colunas e caixas satisfazem \texttt{all\_different};
+    \item \texttt{candidates/3} — dada uma célula vazia, calcula os valores 1--9 que não violam nenhuma restrição da célula;
+    \item \texttt{next\_empty/2} — selecciona a célula vazia com menos candidatos (MRV).
 \end{itemize}
-% subsection examples (end)
 
-\section{How to Write Using \texttt{LaTeX}} % (fold)
-\label{sec:how_to_write_using_latex}
+Em Python (\texttt{board.py}), a representação é equivalente, com operações como \texttt{load\_board/1} para ler o puzzle de ficheiro e \texttt{format\_board/1} para imprimir a grelha.
 
-Please have a look at Chapter~\ref{cha:a_short_latex_tutorial_with_examples}, where you may find many examples of \href{http://tobi.oetiker.ch/lshort/lshort.pdf}{\texttt{LaTeX}} constructs, such as Sectioning, inserting Figures and Tables, writing Equations, Theorems and algorithms, exhibit code listings, etc.
+\subsection{Killer Sudoku}
+\label{ssec:rep_killer}
 
-%% section how_to_write_using_latex (end)
+O Killer Sudoku partilha a mesma representação de grelha. A informação adicional das gaiolas é guardada como uma lista de pares $(s, C)$, onde $s$ é a soma alvo e $C$ é a lista de células (como pares linha-coluna de base 1) que formam a gaiola.
+
+Em Prolog, as gaiolas são codificadas como factos \texttt{killer\_cage(PuzzleId, Sum, Cells)} no ficheiro \texttt{killer\_sudoku.pl}. Em Python, o formato de ficheiro é:
+\begin{verbatim}
+  cage(Sum, [(R1,C1),(R2,C2),...]).
+\end{verbatim}
+que é interpretado pela função \texttt{load\_killer\_puzzle} em \texttt{board.py}.
+
+\section{Pesquisa em Espaço de Estados — Prolog}
+\label{sec:prolog}
+
+Os algoritmos de pesquisa em Prolog operam sobre \emph{atribuições parciais}: começam pelo puzzle inicial (com os \emph{givens} fixos e as restantes células a zero) e atribuem progressivamente valores às células vazias. Cada nó no espaço de estados é uma grelha parcialmente preenchida que satisfaz as restrições até ao momento.
+
+\subsection{Aprofundamento Iterativo (DFID)}
+\label{ssec:dfid}
+
+O aprofundamento iterativo com pesquisa em profundidade (DFID) é um algoritmo de pesquisa não informada que combina a completude e optimalidade da pesquisa em largura com a eficiência em memória da pesquisa em profundidade \cite{russell2020ai}. O algoritmo executa sucessivas iterações de pesquisa em profundidade limitada, aumentando o limite de profundidade em cada iteração.
+
+\paragraph{Limite de Profundidade com MRV.}
+No contexto do Sudoku, o limite de profundidade natural é o número de células vazias no puzzle: cada nó interno corresponde a uma célula preenchida, pelo que a solução está exactamente a essa profundidade. Quando se usa MRV para seleccionar a próxima célula a preencher, a pesquisa é guiada pelas células mais restringidas primeiro, o que tipicamente reduz o ramo para um único filho válido (ou um número muito pequeno). Como consequência, a iteração correspondente ao limite máximo (número de células vazias) é a única que atinge nós folha, e as iterações anteriores terminam rapidamente por não encontrar folhas. O DFID \emph{degenera efectivamente numa DFS com constraint checking}, executando uma única passagem significativa.
+
+\paragraph{Implementação.}
+O predicado principal é \texttt{solve\_file/2}, que lê o puzzle de um ficheiro, inicializa um contador de nós e chama \texttt{dfid/4}:
+\begin{verbatim}
+  dfid(Board, Depth, MaxDepth, Nodes) :-
+      Depth =< MaxDepth,
+      ( solved(Board) -> true
+      ; next_empty(Board, Pos),
+        candidates(Board, Pos, Vals),
+        member(Val, Vals),
+        place(Board, Pos, Val, Board2),
+        Nodes1 is Nodes + 1,
+        dfid(Board2, Depth+1, MaxDepth, Nodes1)
+      ).
+\end{verbatim}
+
+\subsection{Pesquisa A*}
+\label{ssec:astar}
+
+A pesquisa A* é um algoritmo de pesquisa informada que expande o nó com menor valor de $f(n) = g(n) + h(n)$, onde $g(n)$ é o custo do caminho desde o estado inicial até $n$ e $h(n)$ é uma estimativa heurística do custo de $n$ até ao objectivo \cite{russell2020ai}.
+
+\paragraph{Heurística Admissível.}
+A heurística adoptada é $h(n) = $ número de células vazias no estado $n$. Esta heurística é \emph{admissível} porque, para resolver cada célula vazia, é necessário efectuar pelo menos uma atribuição, pelo que $h(n)$ nunca sobrestima o custo real. Formalmente, se a solução se encontra a $k$ células de profundidade a partir de $n$, então $h(n) = k = $ custo real, pelo que $h(n) \leq h^*(n)$.
+
+\paragraph{Comportamento com esta Heurística.}
+Com $g(n) = $ número de células já preenchidas e $h(n) = $ número de células vazias, tem-se $f(n) = g(n) + h(n) = 81 - (\text{givens})$, que é \emph{constante} para todos os nós ao mesmo nível de profundidade. Neste caso, o A* comporta-se essencialmente como uma pesquisa em largura ao nível da ordenação da fila de prioridade, e a poda advém inteiramente da verificação de restrições (candidatos vazios), não da ordenação heurística.
+
+\paragraph{Implementação.}
+O A* usa uma fila de prioridade implementada com a biblioteca \texttt{library(heaps)} do SWI-Prolog. Cada elemento da fila é um par $(f, \text{Board})$. Uma lista fechada mantém os estados já expandidos. A expansão de cada nó usa \texttt{next\_empty/2} (MRV) para seleccionar a célula a preencher:
+\begin{verbatim}
+  astar(OpenHeap, Closed, Solution, Nodes) :-
+      get_from_heap(OpenHeap, _, Board, Rest),
+      ( solved(Board) -> Solution = Board
+      ; \+ member(Board, Closed),
+        next_empty(Board, Pos),
+        candidates(Board, Pos, Vals),
+        expand_children(Board, Pos, Vals, Rest,
+                        [Board|Closed], NewOpen, Nodes1),
+        astar(NewOpen, [Board|Closed], Solution, Nodes1)
+      ).
+\end{verbatim}
+
+\subsection{Extensão para Killer Sudoku — Prolog}
+\label{ssec:killer_prolog}
+
+A extensão para Killer Sudoku em Prolog (\texttt{killer\_sudoku.pl}) acrescenta dois predicados de verificação de gaiolas:
+
+\begin{itemize}
+    \item \texttt{valid\_cage(Board, cage(Sum, Cells))} — verifica que, quando todas as células da gaiola estão preenchidas, a sua soma é igual a \texttt{Sum} e não existem repetições;
+    \item \texttt{partial\_cage\_ok(Board, cage(Sum, Cells))} — verifica a consistência parcial durante a pesquisa: se já existem valores parcialmente atribuídos na gaiola, a sua soma parcial não pode exceder \texttt{Sum}, e os valores já atribuídos não se podem repetir.
+\end{itemize}
+
+O predicado \texttt{partial\_cage\_ok} é crucial para a poda: ao ser chamado após cada atribuição durante a DFS/A*, elimina ramos que já violam as restrições das gaiolas, mesmo antes de a gaiola estar completamente preenchida.
+
+Os solucionadores \texttt{solve\_dfid\_killer/3} e \texttt{solve\_astar\_killer/3} são extensões directas dos solucionadores clássicos, com a verificação adicional de \texttt{partial\_cage\_ok} em cada passo de expansão.
+
+\section{Pesquisa em Espaço de Soluções — Python}
+\label{sec:python}
+
+Ao contrário dos algoritmos de pesquisa em espaço de estados, o SA e o GA operam sobre \emph{soluções completas}: começam com uma grelha $9 \times 9$ completamente preenchida (possivelmente inválida) e aplicam operadores que a transformam noutra solução completa, tentando minimizar o número de violações de restrições.
+
+\subsection{Inicialização e Operador}
+\label{ssec:init_op}
+
+\paragraph{Inicialização.}
+Cada caixa $3 \times 3$ é preenchida independentemente com os valores em falta (1--9 menos os \emph{givens} da caixa), dispostos de forma aleatória. Esta inicialização garante que \emph{as restrições de caixa estão sempre satisfeitas por construção}. Apenas as restrições de linha e coluna (e de gaiola, no Killer) podem ser violadas.
+
+\paragraph{Operador de Troca Intra-caixa.}
+O operador de vizinhança selecciona uma caixa aleatória e troca dois valores mutáveis (não-\emph{given}) dentro dela. Como a troca ocorre dentro da mesma caixa, as restrições de caixa continuam satisfeitas. Formalmente, se a caixa contém os valores $\{v_1, \ldots, v_9\}$ antes da troca, continua a contê-los depois.
+
+\paragraph{Função de Custo.}
+O custo $C(\text{board})$ conta as violações de linha e coluna:
+\begin{equation}
+    C = \sum_{i=1}^{9} (9 - |\text{distinct}(\text{row}_i)|) + \sum_{j=1}^{9} (9 - |\text{distinct}(\text{col}_j)|)
+\end{equation}
+O custo mínimo é 0 (solução completa e válida) e o máximo teórico é 144. No Killer Sudoku, soma-se adicionalmente o custo de gaiola:
+\begin{equation}
+    C_{\text{cage}} = \sum_{\text{gaiola}} \mathbb{1}[\text{soma} \neq \text{alvo}] + (\text{tamanho} - |\text{distinct}(\text{gaiola})|)
+\end{equation}
+
+\subsection{Arrefecimento Simulado (SA)}
+\label{ssec:sa}
+
+O arrefecimento simulado (SA) \cite{kirkpatrick1983optimization} é uma metaheurística que aceita soluções piores com uma probabilidade que diminui ao longo do tempo, permitindo escapar de mínimos locais.
+
+\paragraph{Esquema de Temperatura.}
+A temperatura decresce de forma geométrica: $T_{t+1} = T_t \times \alpha$, onde $\alpha = 0.9999$ é o factor de arrefecimento. Com $T_{\text{init}} = 2.0$ e $T_{\text{min}} = 0.001$, cada execução natural tem $\approx 76\,000$ iterações.
+
+\paragraph{Aceitação de Soluções.}
+Um estado vizinho com custo $C_{\text{viz}}$ é aceite se $C_{\text{viz}} < C_{\text{actual}}$ (melhoria) ou com probabilidade $e^{-\Delta C / T}$ se $\Delta C = C_{\text{viz}} - C_{\text{actual}} > 0$ (aceitação probabilística). Esta regra permite escapar de mínimos locais quando a temperatura é elevada.
+
+\paragraph{Reinicialização por Conclusão Natural.}
+Quando a temperatura atinge $T_{\text{min}}$ sem encontrar a solução, o tabuleiro é reinicializado aleatoriamente e a temperatura é reposta em $T_{\text{init}}$. Esta estratégia de \emph{reinicialização por conclusão natural} garante que cada execução percorre o ciclo completo de arrefecimento, da fase exploratória (alta temperatura) à fase exploitativa (baixa temperatura), antes de recomeçar. O número total de iterações é limitado a $300\,000$.
+
+\paragraph{Mínimo Local a Custo 2.}
+Em puzzles de elevada dificuldade, o SA pode ficar preso num estado com custo 2 — duas violações em linhas ou colunas diferentes que envolvem células em caixas distintas. O operador de troca intra-caixa não pode resolver este problema directamente: corrigir uma violação requer trocar células entre caixas diferentes, o que violaria as restrições de caixa. A baixa temperatura torna a probabilidade de aceitar estados com custo superior praticamente nula ($e^{-1/0.001} \approx 0$), pelo que o algoritmo fica bloqueado. A solução é aguardar pelo arrefecimento completo e reinicializar.
+
+\subsection{Algoritmo Genético (GA)}
+\label{ssec:ga}
+
+O algoritmo genético (GA) \cite{holland1975adaptation} mantém uma população de soluções candidatas e aplica operadores inspirados na evolução biológica (selecção, cruzamento, mutação) para melhorar a população ao longo das gerações.
+
+\paragraph{Cromossoma.}
+Cada cromossoma é uma grelha $9 \times 9$ inicializada da mesma forma que o SA (restrições de caixa garantidas por construção).
+
+\paragraph{Função de Fitness.}
+$f(\text{cromossoma}) = -C(\text{cromossoma})$, onde $C$ é a função de custo definida na Secção~\ref{ssec:init_op}. O GA \emph{maximiza} o fitness, equivalente a minimizar o custo.
+
+\paragraph{Selecção por Torneio.}
+São seleccionados $k = 3$ indivíduos aleatórios da população e o de maior fitness é escolhido como progenitor. Este processo é repetido para seleccionar dois progenitores ($p_1, p_2$) para o cruzamento.
+
+\paragraph{Cruzamento Preservador de Caixas.}
+Para cada uma das 9 caixas, o filho herda a caixa inteira do $p_1$ ou do $p_2$ com probabilidade 0.5. As células \emph{given} permanecem fixas. Este operador garante que as restrições de caixa se mantêm no filho.
+
+\paragraph{Mutação.}
+Com probabilidade $p_m = 0.25$, aplica-se a um filho o operador de troca intra-caixa (igual ao do SA), realizando 2 trocas.
+
+\paragraph{Elitismo e Reinicialização por Estagnação.}
+Os 2 melhores indivíduos da geração actual sobrevivem inalterados para a próxima geração (\emph{elitismo}). Se o melhor fitness não melhorar durante $2000$ gerações consecutivas (\emph{estagnação}), a população é reinicializada aleatoriamente, mantendo apenas o melhor indivíduo actual.
+
+\subsection{Extensão para Killer Sudoku — Python}
+\label{ssec:killer_python}
+
+A extensão para Killer Sudoku em Python é transparente para os algoritmos SA e GA: a função de custo é aumentada com o custo de gaiola $C_{\text{cage}}$ (Secção~\ref{ssec:init_op}), implementado em \texttt{board.py::cage\_cost}. O carregamento do puzzle é tratado por \texttt{load\_killer\_puzzle}, que lê a grelha e as definições de gaiolas do ficheiro de texto. Tanto o SA como o GA seleccionam automaticamente o modo Killer quando o puzzle fornecido pertence ao conjunto \texttt{KILLER\_PUZZLES}.

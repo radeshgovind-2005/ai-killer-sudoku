@@ -1,96 +1,162 @@
-\chapter{Tutorial de \texttt{LaTeX} com exemplos}
-\label{cha:a_short_latex_tutorial_with_examples}
+%
+%  chapter3.tex  —  Resultados Experimentais e Conclusões
+%
+\chapter{Resultados Experimentais e Conclusões}
+\label{cha:resultados}
 
-Este capítulo irá mostrar como pode inserir tabelas, figuras e/ou listagens. Consi\-de\-re-se que listagens não são todo o código mas partes do código. Estas irão suportar algumas frases dos parágrafos escritos. Não se esqueça, que todas as tabelas, figuras e listagens devem ser referenciadas no corpo do texto.
+\section{Configuração Experimental}
+\label{sec:config_exp}
 
-\section{Tabelas} % (fold)
-\label{sec:inserting_tables}
+Os testes foram realizados num MacBook Pro com processador Apple M-series, sistema operativo macOS, SWI-Prolog 10.0.2 e Python 3.14.3. Foram utilizados quatro puzzles clássicos de dificuldade crescente e um puzzle Killer Sudoku (fácil):
 
-Some notes are important to followed, such as present in \tablename~  \ref{tab:results}: 
-\begin{inparaenum}[i)]
-	\item Not defined vertical lines;
-	\item The legend must be on top;
-	\item Use \verb!\toprule!, \verb!\midrule! and \verb!\bottomrule! to draw horizontal lines.
-\end{inparaenum}
- 
+\begin{itemize}
+    \item \textbf{Fácil} (\texttt{classic\_easy\_01}) — 51 células vazias;
+    \item \textbf{Médio} (\texttt{classic\_medium\_01}) — 51 células vazias;
+    \item \textbf{Difícil} (\texttt{classic\_hard\_01}) — puzzle AI Escargot (17 \emph{givens});
+    \item \textbf{Especialista} (\texttt{classic\_expert\_01}) — 51 células vazias;
+    \item \textbf{Killer Fácil} (\texttt{killer\_easy\_01}) — 81 células vazias, 27 gaiolas.
+\end{itemize}
+
+Os solucionadores SA e GA foram executados 3 vezes por puzzle (natureza estocástica). O limite de tempo de Prolog foi de 120 segundos por chamada. O SA usou no máximo $300\,000$ iterações. O GA usou população de 200 indivíduos e no máximo $10\,000$ gerações.
+
+\section{Resultados dos Solucionadores Prolog}
+\label{sec:resultados_prolog}
+
+A Tabela~\ref{tab:prolog_classic} apresenta os resultados do DFID e A* para os puzzles clássicos.
+
 \begin{table}[ht]
-	\caption{Table's rules.}\vskip0.5em
-	\label{tab:results}
-\centering
-\begin{tabular}{llr}
-\toprule
-\multicolumn{2}{c}{Item} \\
-\cmidrule(r){1-2}
-Animal & Description & Price (\$) 
-\\
-\midrule
-Gnat  & per gram & 13.65 \\
-      & each     &  0.01 \\
-Gnu   & stuffed  & 92.50 \\
-Emu   & stuffed  & 33.33 \\
-\bottomrule
-\end{tabular}
+    \caption{Resultados do DFID e A* nos puzzles clássicos.}
+    \label{tab:prolog_classic}
+    \centering
+    \begin{tabular}{lrrrr}
+        \toprule
+        \textbf{Puzzle} & \multicolumn{2}{c}{\textbf{DFID}} & \multicolumn{2}{c}{\textbf{A*}} \\
+        \cmidrule(r){2-3} \cmidrule(r){4-5}
+        & Nós & Tempo (s) & Nós & Tempo (s) \\
+        \midrule
+        Fácil    &    51 & 0.163 &    51 & 0.173 \\
+        Médio    &    49 & 0.153 &    49 & 0.160 \\
+        Difícil  &   481 & 2.671 &  2276 & 13.314 \\
+        Especialista &  846 & 3.667 &   216 & 1.024 \\
+        \bottomrule
+    \end{tabular}
 \end{table}
 
+\paragraph{Análise DFID.}
+O DFID com MRV expande poucos nós em todos os puzzles. O MRV reduz drasticamente o factor de ramificação ao escolher sempre a célula com menos candidatos válidos. Em puzzles bem constrangidos (fácil, médio), o número de nós expandidos é inferior a 55, o que confirma que a pesquisa é efectivamente uma DFS com verificação de restrições que raramente precisa de retroceder. No puzzle Difícil (AI Escargot, com apenas 17 \emph{givens}), o DFID expande 481 nós — o maior esforço de pesquisa entre os casos testados com este algoritmo.
 
-\section{Importar Figuras} % (fold)
-\label{sec:importing_images}
+\paragraph{Análise A*.}
+O A* expande exactamente o mesmo número de nós que o DFID nos puzzles Fácil e Médio. No puzzle Difícil, o A* expande 2276 nós (vs. 481 do DFID), porque a heurística $h = $ células vazias é constante ao mesmo nível de profundidade, fazendo o A* comportar-se como BFS. A fila de prioridade cresce rapidamente, aumentando o overhead por nó. No puzzle Especialista, o A* expande apenas 216 nós vs. 846 do DFID, possivelmente devido a diferenças na ordenação da fila de prioridade em casos de empate de prioridade.
 
-\subsection{Inserir figuras lado-a-lado com texto} % (fold)
- \label{ssec:inserting_images_wrapped_with_text}
- 
- You should only use this feature is \emph{really} necessary. This means, you have a very small image, that will look lonely just with text above and below.
+\paragraph{Resultados Killer Sudoku — Prolog.}
+A Tabela~\ref{tab:prolog_killer} mostra os resultados para o puzzle Killer Fácil.
 
- \begin{wrapfigure}{l}{3cm}
-   \centering
-     \includegraphics[width=2cm]{evolution_steps-vectorial}
-   \caption{Vectorial image}\
- \end{wrapfigure}	
- 
- \noindent\verb!\usepackage{wrapfig}!\\
- This then gives you access to:\\
- \verb!\begin{wrapfigure}[lineheight]{alignment}{width}!
- 
- Alignment can normally be either 'l' for left, or 'r' for right. Lowercase 'l' or 'r' forces the figure to start precisely where specified (and may cause it to run over page breaks), while capital 'L' or 'R' allows the figure to float. If you defined your document as twosided, the alignment can also be 'i' for inside or 'o' for outside, as well as 'I' or 'O'. The width is obviously the width of the figure. \\[.5em]
+\begin{table}[ht]
+    \caption{Resultados do DFID e A* no Killer Sudoku (fácil).}
+    \label{tab:prolog_killer}
+    \centering
+    \begin{tabular}{lrr}
+        \toprule
+        \textbf{Algoritmo} & \textbf{Nós Expandidos} & \textbf{Tempo (s)} \\
+        \midrule
+        DFID Killer & 51 & 0.188 \\
+        A* Killer   & 51 & 0.176 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
- 
- 
-\subsection{Outras imagens} % (fold)
-\label{ssec:floats_figures_and_captions}
+O puzzle Killer Fácil (sem \emph{givens} iniciais) é resolvido com apenas 51 nós por ambos os algoritmos. A poda por \texttt{partial\_cage\_ok} é muito eficaz: as restrições de gaiola eliminam candidatos logo nas primeiras atribuições, reduzindo o espaço de busca de forma semelhante aos \emph{givens} de um puzzle clássico.
 
- 
-There are two different ways to place two figures/tables side-by-side.  More complicated figures with multiple images. You can do this using subfigure environments inside a figure environment. Subfigure will alphabetically number your subfigures and you have access to the complete reference as usual through \verb!\ref{fig:figurelabel}!, \figurename~\ref{fig:figura-completa}, or \figurename~\ref{fig:ra-raster} using \verb!\ref{fig:subfigurelabel}!.
+\section{Resultados do Arrefecimento Simulado (SA)}
+\label{sec:resultados_sa}
 
-\begin{figure}[htbp]
-	\centering
-    \begin{subfigure}[b]{0.25\textwidth}
-    	\centering
-		\includegraphics[width=\textwidth]{ra-vectorial}
-		\caption{}
-		\label{fig:ra-vectorial}
-     \end{subfigure}	
-\qquad\qquad
- 	\begin{subfigure}[b]{0.25\textwidth}
-    	\centering
-		\includegraphics[width=\textwidth]{ra-raster}
-		\caption{}
-		\label{fig:ra-raster}
-	\end{subfigure}		
-  \caption{Subfigure example with vectorial and no-vectorial images}
-  \label{fig:figura-completa}
-\end{figure}
+A Tabela~\ref{tab:sa} apresenta os resultados do SA nas 3 execuções por puzzle.
 
-\section{Listagens} % (fold)
-\label{sec:listings}
+\begin{table}[ht]
+    \caption{Resultados do SA (3 execuções por puzzle; limite: 300\,000 iterações).}
+    \label{tab:sa}
+    \centering
+    \begin{tabular}{llrrr}
+        \toprule
+        \textbf{Puzzle} & \textbf{Resultado} & \textbf{Execuções Resolvidas} & \textbf{Iter. (média)} & \textbf{Tempo (s)} \\
+        \midrule
+        Fácil       & Resolvido   & 3/3 & $\approx$17\,644 & 0.06--0.10 \\
+        Médio       & Resolvido   & 3/3 & $\approx$44\,223 & 0.08--0.38 \\
+        Difícil     & Não resolvido & 0/3 & 300\,000 & $\approx$1.21 \\
+        Especialista & Parcial    & 1/3 & $\approx$95\,647 & 0.38 \\
+        Killer Fácil & Resolvido  & 3/3 & $\approx$119\,560 & 0.87--1.58 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
-Using the package listings you can add non-formatted text as you would do with \verb!\begin{verbatim}! but its main aim is to include the source code of any programming language within your document, or inline with 
-\verb!\codejava{int i;}.!
-If you wish to include pseudocode or algorithms see \url{http://en.wikibooks.org/wiki/LaTeX/Algorithms\_and\_Pseudocode}, as \lstlistingname ~\ref{lst:Calculadora}.
-\vskip1em
+O SA resolve de forma fiável os puzzles Fácil e Médio em poucas dezenas de milissegundos. O puzzle Difícil (AI Escargot) constitui o caso mais desafiante: em todas as execuções, o algoritmo fica bloqueado num estado com custo 2, que corresponde a duas violações residuais em linhas/colunas distintas, cujas células envolvidas pertencem a caixas diferentes. O operador de troca intra-caixa não consegue resolver este conflito sem aceitar temporariamente estados de custo superior, o que a temperatura baixa torna improvável. O puzzle Especialista é resolvido em 1 de cada 3 execuções, demonstrando a variabilidade estocástica do algoritmo.
 
-%  \lstfromfile{language}{linerange}{caption}{label}{othersinsideoflstinoputlisting}{path}
+O puzzle Killer Fácil é resolvido em todas as execuções, apesar de não ter \emph{givens} iniciais, porque as restrições de gaiola reduzem substancialmente o espaço efectivo de soluções.
 
-\lstfromfile{java}{7,11-12,15-17}{Opera\c{c}\~{o}es elementares de uma Calculadora}{Calculadora}{showlines=true,morekeywords={begin,System,out,print},numbers=left, firstnumber=1}{Calculadora.java}
+\section{Resultados do Algoritmo Genético (GA)}
+\label{sec:resultados_ga}
 
+A Tabela~\ref{tab:ga} apresenta os resultados do GA.
 
-\centering{\textbf{Written by Matilde Pós-de-Mina Pato\footnote{O autor escreve segundo o antigo AO}, \\2020 September -  version 2.2}}
+\begin{table}[ht]
+    \caption{Resultados do GA (3 execuções; pop.=200, máx. 10\,000 gerações, 15--26 s/execução).}
+    \label{tab:ga}
+    \centering
+    \begin{tabular}{llrr}
+        \toprule
+        \textbf{Puzzle} & \textbf{Resultado} & \textbf{Execuções Resolvidas} & \textbf{Custo Mínimo} \\
+        \midrule
+        Fácil        & Não resolvido & 0/3 & 6 \\
+        Médio        & Não resolvido & 0/3 & 2 \\
+        Difícil      & Não resolvido & 0/3 & 4 \\
+        Especialista & Não resolvido & 0/3 & 4 \\
+        Killer Fácil & Não resolvido & 0/3 & 15 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+O GA não encontrou uma solução completa em nenhuma das execuções realizadas. O principal problema é a \emph{convergência prematura}: a diversidade genética da população colapsa rapidamente, e o GA queda num mínimo local sem conseguir sair, mesmo com a reinicialização por estagnação. O cruzamento preservador de caixas, apesar de manter as restrições de caixa, não introduz diversidade suficiente para explorar espaços de soluções de dimensão elevada.
+
+O custo mínimo atingido pelo GA é consistentemente superior ao do SA nos mesmos puzzles. No puzzle Killer Fácil, o custo mínimo de 15 reflecte que o GA raramente satisfaz as restrições de gaiola, que exigem uma combinação muito específica de valores.
+
+\section{Análise Comparativa}
+\label{sec:analise_comp}
+
+\begin{table}[ht]
+    \caption{Comparação dos quatro solucionadores nos puzzles clássicos.}
+    \label{tab:comparacao}
+    \centering
+    \begin{tabular}{lcccc}
+        \toprule
+        \textbf{Puzzle} & \textbf{DFID} & \textbf{A*} & \textbf{SA} & \textbf{GA} \\
+        \midrule
+        Fácil       & \checkmark\ 0.16s & \checkmark\ 0.17s & \checkmark\ 0.06--0.10s & $\times$\ custo 6 \\
+        Médio       & \checkmark\ 0.15s & \checkmark\ 0.16s & \checkmark\ 0.08--0.38s & $\times$\ custo 2 \\
+        Difícil     & \checkmark\ 2.67s & \checkmark\ 13.3s & $\times$\ custo 2     & $\times$\ custo 4 \\
+        Especialista & \checkmark\ 3.67s & \checkmark\ 1.02s & 1/3\ resolvido        & $\times$\ custo 4 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+Os algoritmos de pesquisa em espaço de estados (DFID, A*) são \emph{completos} e \emph{óptimos}: se existir uma solução, encontram-na sempre. Os algoritmos de optimização (SA, GA) são \emph{incompletos}: podem não encontrar a solução mesmo que ela exista. Em contrapartida, o SA tem um desempenho muito bom em puzzles fáceis e médios, com tempos inferiores aos do Prolog (overhead de interpretação).
+
+O A* é menos eficiente que o DFID no puzzle Difícil porque a heurística adoptada não distingue estados ao mesmo nível de profundidade, fazendo a fila de prioridade crescer excessivamente. O DFID, com a sua natureza DFS, mantém um número constante de nós em memória, o que o torna mais adequado para puzzles muito restringidos.
+
+\section{Conclusões}
+\label{sec:conclusoes}
+
+Este trabalho implementou e comparou quatro abordagens algorítmicas para a resolução do Sudoku clássico e do Killer Sudoku. As principais conclusões são:
+
+\begin{enumerate}
+    \item \textbf{DFID com MRV} é o solucionador mais robusto e fiável: resolve todos os puzzles testados, com uso mínimo de memória e tempos razoáveis. A heurística MRV reduz o espaço de busca de forma tão eficaz que o DFID degenera numa DFS com verificação de restrições.
+
+    \item \textbf{A*} partilha a completude do DFID, mas a heurística $h = $ células vazias não distingue estados ao mesmo nível, tornando-o equivalente a uma pesquisa em largura guiada por restrições. Em puzzles com muitos estados alternativos, o A* expande significativamente mais nós que o DFID.
+
+    \item \textbf{SA} é eficaz para puzzles de dificuldade baixa a média, com tempos muito competitivos. A sua principal limitação é o bloqueio em mínimos locais de custo 2, que o operador intra-caixa não consegue resolver directamente a baixa temperatura. A extensão para Killer Sudoku é elegante: basta adicionar o custo de gaiola à função de custo.
+
+    \item \textbf{GA} sofre de convergência prematura e não encontrou soluções completas nos testes realizados. O operador de cruzamento preservador de caixas mantém a validade das restrições de caixa, mas não diversifica suficientemente a população para escapar de mínimos locais profundos.
+
+    \item A extensão para \textbf{Killer Sudoku} foi implementada com sucesso em ambas as linguagens. Em Prolog, a poda por \texttt{partial\_cage\_ok} é muito eficaz, reduzindo o espaço de busca mesmo sem \emph{givens} iniciais. Em Python, a adição do custo de gaiola à função de custo é directa e transparente para os algoritmos SA e GA.
+\end{enumerate}
+
+Como trabalho futuro, seria interessante explorar operadores inter-caixa controlados (que preservem as restrições de caixa mas permitam mais mobilidade), técnicas de \emph{reheating} no SA para escapar de mínimos locais profundos, e operadores de cruzamento mais diversificados no GA (por exemplo, cruzamento a nível de linha/coluna em vez de caixa).

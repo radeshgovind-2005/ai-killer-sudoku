@@ -1,17 +1,3 @@
 \abstractPT  % Do NOT modify this line
 
-O objectivo deste documento é uniformizar a apresentação dos trabalhos escolares de licenciatura, trabalhos de investigação científicos e dissertações de mestrado.
-
-Independentemente da língua em que está escrita o documento, é necessário um resumo na língua do texto principal e um resumo noutra língua.  Assume-se que as duas línguas em questão serão sempre o Português e o Inglês.
-
-Resumo é a versão precisa, sintética e selectiva do texto do documento, destacando os elementos de maior importância. O resumo possibilita a maior divulgação do trabalho e a sua indexação em bases de dados.
-
-O resumo não deve conter citações bibliográficas, tabelas, quadros, esquemas. Deve evitar o uso de abreviaturas e siglas - quando absolutamente necessário, citá-las entre parênteses e precedidas da explicação de seu significado, na primeira vez em que aparecem. 
-
-E, deve-se evitar o uso de expressões como ``O presente trabalho trata $\ldots$'', ``O documento conclui que $\ldots$'', ``aparentemente é $\ldots$'' etc. 
-
-Existe um limite de palavras, 150 palavras é o limite.
-
-\begin{center}
-	\textbf{\large this package and template are not official for ISEL/IPL}.
-\end{center}
+Este trabalho apresenta quatro solucionadores automáticos para o puzzle Sudoku clássico e para a sua variante Killer Sudoku. Em Prolog, foram implementados o algoritmo de aprofundamento iterativo (DFID) e o algoritmo A*, ambos com a heurística de valores mínimos restantes (MRV). Em Python, foram implementados o arrefecimento simulado (SA) e o algoritmo genético (GA), com representação baseada em trocas intra-caixa. Todos os solucionadores foram estendidos para suportar Killer Sudoku. Os resultados mostram que o DFID com MRV resolve todas as instâncias em menos de quatro segundos. O A* expande mais nós em puzzles com elevado grau de liberdade. O SA resolve de forma fiável instâncias fáceis e intermédias, ficando por vezes preso em mínimos locais de custo dois. O GA converge prematuramente e não encontra soluções completas dentro dos limites testados.
