@@ -37,7 +37,6 @@ CLI:
 import argparse
 import random
 import time
-from pathlib import Path
 
 from board import Board, Cage, load_board, load_killer_puzzle, print_board, format_board, BOARD_SIZE, BOX_SIZE
 from puzzles import PUZZLES, KILLER_PUZZLES, OUTPUT_DIR
