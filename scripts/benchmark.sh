@@ -45,6 +45,21 @@ log() { echo "$*" | tee -a "${RESULTS}"; }
 
 separator() { log "──────────────────────────────────────────────────────────────"; }
 
+# ── macOS-compatible timeout ───────────────────────────────────────────────────
+# macOS ships without GNU coreutils timeout; implement via background job + kill.
+run_with_timeout() {
+    local secs="$1"; shift
+    "$@" &
+    local pid=$!
+    ( sleep "${secs}" && kill -9 "${pid}" 2>/dev/null ) &
+    local watcher=$!
+    wait "${pid}" 2>/dev/null
+    local rc=$?
+    kill "${watcher}" 2>/dev/null
+    wait "${watcher}" 2>/dev/null
+    return "${rc}"
+}
+
 # ── Header ─────────────────────────────────────────────────────────────────────
 separator
 log "AI Killer Sudoku — Benchmark Results"
@@ -65,7 +80,7 @@ run_prolog() {
     log "[${label}] ${puzzle_path##*/}"
     local tmp
     tmp="$(mktemp)"
-    if timeout "${PROLOG_TIMEOUT}" swipl -q -s "${plfile}" \
+    if run_with_timeout "${PROLOG_TIMEOUT}" swipl -q -s "${plfile}" \
            -g "${goal}" >> "${tmp}" 2>&1; then
         cat "${tmp}" | tee -a "${RESULTS}"
     else
@@ -103,11 +118,15 @@ log "Killer Sudoku (DFID + A*) — easy_01"
 separator
 log ""
 log "[Killer DFID+A*] easy_01"
-{
-    timeout "${PROLOG_TIMEOUT}" swipl -q -s "${KILLER_PL}" \
-        -g "solve_killer_file(easy_01, _), halt" 2>&1 \
-        | tee -a "${RESULTS}"
-} || log "  TIMEOUT (>${PROLOG_TIMEOUT}s) or ERROR"
+TMP_K="$(mktemp)"
+if run_with_timeout "${PROLOG_TIMEOUT}" swipl -q -s "${KILLER_PL}" \
+       -g "solve_killer_file(easy_01, _), halt" >> "${TMP_K}" 2>&1; then
+    cat "${TMP_K}" | tee -a "${RESULTS}"
+else
+    log "  TIMEOUT (>${PROLOG_TIMEOUT}s) or ERROR"
+    cat "${TMP_K}" >> "${RESULTS}"
+fi
+rm -f "${TMP_K}"
 
 # ── SA — classic puzzles ───────────────────────────────────────────────────────
 separator
@@ -128,9 +147,28 @@ for puzzle in "${PUZZLES[@]}"; do
     log ""
     log "[GA] ${puzzle}"
     python3 "${GA_PY}" --puzzle "${puzzle}" --pop 200 \
-        --generations 5000 --runs "${PYTHON_RUNS}" \
+        --generations 10000 --runs "${PYTHON_RUNS}" \
         2>&1 | tee -a "${RESULTS}"
 done
+
+# ── SA — killer puzzle ─────────────────────────────────────────────────────────
+separator
+log "Simulated Annealing — killer puzzle (${PYTHON_RUNS} runs)"
+separator
+log ""
+log "[SA] killer"
+python3 "${SA_PY}" --puzzle killer --runs "${PYTHON_RUNS}" \
+    2>&1 | tee -a "${RESULTS}"
+
+# ── GA — killer puzzle ─────────────────────────────────────────────────────────
+separator
+log "Genetic Algorithm — killer puzzle (${PYTHON_RUNS} runs)"
+separator
+log ""
+log "[GA] killer"
+python3 "${GA_PY}" --puzzle killer --pop 200 \
+    --generations 10000 --runs "${PYTHON_RUNS}" \
+    2>&1 | tee -a "${RESULTS}"
 
 # ── Summary table ──────────────────────────────────────────────────────────────
 separator

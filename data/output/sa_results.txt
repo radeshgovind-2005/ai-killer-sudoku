@@ -1,0 +1,490 @@
+
+=== SA  puzzle=easy  runs=3 ===
+  run 1: cost=3  iters=20879  time=12.718s
+  run 2: SOLVED  iters=7831  time=4.787s
+  run 3: cost=2  iters=20852  time=12.744s
+  best_cost=0
+  best_solution:
+5 3 4 6 7 8 9 1 2
+6 7 2 1 9 5 3 4 8
+1 9 8 3 4 2 5 6 7
+8 5 9 7 6 1 4 2 3
+4 2 6 8 5 3 7 9 1
+7 1 3 9 2 4 8 5 6
+9 6 1 5 3 7 2 8 4
+2 8 7 4 1 9 6 3 5
+3 4 5 2 8 6 1 7 9
+
+=== SA  puzzle=easy  runs=3 ===
+  run 1: SOLVED  iters=12601  time=0.113s
+  run 2: SOLVED  iters=13785  time=0.120s
+  run 3: SOLVED  iters=9818  time=0.083s
+  best_cost=0
+  best_solution:
+5 3 4 6 7 8 9 1 2
+6 7 2 1 9 5 3 4 8
+1 9 8 3 4 2 5 6 7
+8 5 9 7 6 1 4 2 3
+4 2 6 8 5 3 7 9 1
+7 1 3 9 2 4 8 5 6
+9 6 1 5 3 7 2 8 4
+2 8 7 4 1 9 6 3 5
+3 4 5 2 8 6 1 7 9
+
+=== SA  puzzle=easy  runs=3 ===
+  run 1: cost=2  iters=21996  time=0.187s
+  run 2: SOLVED  iters=8788  time=0.075s
+  run 3: SOLVED  iters=19742  time=0.169s
+  best_cost=0
+  best_solution:
+5 3 4 6 7 8 9 1 2
+6 7 2 1 9 5 3 4 8
+1 9 8 3 4 2 5 6 7
+8 5 9 7 6 1 4 2 3
+4 2 6 8 5 3 7 9 1
+7 1 3 9 2 4 8 5 6
+9 6 1 5 3 7 2 8 4
+2 8 7 4 1 9 6 3 5
+3 4 5 2 8 6 1 7 9
+
+=== SA  puzzle=medium  runs=3 ===
+  run 1: cost=2  iters=21776  time=0.181s
+  run 2: SOLVED  iters=13114  time=0.110s
+  run 3: SOLVED  iters=12418  time=0.101s
+  best_cost=0
+  best_solution:
+4 8 3 9 2 1 6 5 7
+9 6 7 3 4 5 8 2 1
+2 5 1 8 7 6 4 9 3
+5 4 8 1 3 2 9 7 6
+7 2 9 5 6 4 1 3 8
+1 3 6 7 9 8 2 4 5
+3 7 2 6 8 9 5 1 4
+8 1 4 2 5 3 7 6 9
+6 9 5 4 1 7 3 8 2
+
+=== SA  puzzle=hard  runs=3 ===
+  run 1: cost=6  iters=24714  time=0.204s
+  run 2: cost=6  iters=22122  time=0.184s
+  run 3: cost=4  iters=24047  time=0.200s
+  best_cost=4
+  best_solution:
+1 6 4 9 8 7 5 2 3
+3 8 5 4 2 1 9 7 6
+2 7 9 6 3 5 4 8 1
+9 4 2 1 7 8 3 6 5
+5 3 6 9 4 2 8 1 7
+8 1 7 5 6 3 2 4 9
+4 5 3 7 2 6 9 1 8
+6 2 8 3 1 9 7 5 4
+7 9 1 8 5 4 6 3 2
+
+=== SA  puzzle=expert  runs=3 ===
+  run 1: cost=2  iters=22423  time=0.191s
+  run 2: SOLVED  iters=7650  time=0.066s
+  run 3: cost=2  iters=21415  time=0.182s
+  best_cost=0
+  best_solution:
+1 2 8 4 5 7 6 9 3
+5 3 6 9 2 1 7 4 8
+4 7 9 6 3 8 5 2 1
+2 8 5 3 1 9 4 7 6
+7 1 4 5 8 6 9 3 2
+6 9 3 2 7 4 1 8 5
+3 6 2 7 4 5 8 1 9
+9 4 1 8 6 3 2 5 7
+8 5 7 1 9 2 3 6 4
+
+=== SA  puzzle=easy  runs=3 ===
+  run 1: cost=4  iters=21623  time=0.089s
+  run 2: cost=2  iters=25405  time=0.104s
+  run 3: SOLVED  iters=8811  time=0.036s
+  best_cost=0
+  best_solution:
+5 3 4 6 7 8 9 1 2
+6 7 2 1 9 5 3 4 8
+1 9 8 3 4 2 5 6 7
+8 5 9 7 6 1 4 2 3
+4 2 6 8 5 3 7 9 1
+7 1 3 9 2 4 8 5 6
+9 6 1 5 3 7 2 8 4
+2 8 7 4 1 9 6 3 5
+3 4 5 2 8 6 1 7 9
+
+=== SA  puzzle=medium  runs=3 ===
+  run 1: cost=2  iters=20665  time=0.083s
+  run 2: cost=2  iters=21983  time=0.093s
+  run 3: cost=2  iters=21718  time=0.089s
+  best_cost=2
+  best_solution:
+4 8 3 9 2 1 6 7 5
+9 6 7 3 4 5 8 2 1
+2 5 1 8 7 6 4 9 3
+5 4 8 1 3 2 9 7 6
+7 2 9 5 6 4 1 3 8
+1 3 6 7 9 8 2 5 4
+3 7 2 6 8 9 5 4 1
+8 1 4 2 5 3 7 6 9
+6 9 5 4 1 7 3 8 2
+
+=== SA  puzzle=hard  runs=3 ===
+  run 1: cost=6  iters=22313  time=0.092s
+  run 2: cost=4  iters=24152  time=0.099s
+  run 3: cost=4  iters=22265  time=0.092s
+  best_cost=4
+  best_solution:
+4 9 7 3 2 6 8 1 5
+8 3 2 5 1 4 7 9 6
+6 1 5 7 9 8 4 2 3
+9 2 8 4 3 7 5 6 1
+7 5 1 6 8 2 4 3 9
+3 4 6 9 1 5 2 8 7
+2 8 9 6 5 3 1 7 4
+5 7 3 2 4 1 6 9 8
+1 6 4 8 7 9 3 5 2
+
+=== SA  puzzle=expert  runs=3 ===
+  run 1: cost=2  iters=21631  time=0.088s
+  run 2: cost=4  iters=22763  time=0.093s
+  run 3: cost=3  iters=20108  time=0.082s
+  best_cost=2
+  best_solution:
+1 6 2 8 4 7 1 9 3
+5 3 4 9 2 5 6 7 8
+7 8 9 6 3 1 5 2 4
+4 2 5 3 1 9 7 8 6
+9 1 3 7 8 6 4 5 2
+6 7 8 2 5 4 9 3 1
+3 5 6 4 7 8 2 1 9
+2 4 1 5 9 3 8 6 7
+8 9 7 1 6 2 3 4 5
+
+=== SA  puzzle=easy  runs=3 ===
+  run 1: cost=7  iters=500000  time=2.090s
+  run 2: cost=7  iters=500000  time=2.089s
+  run 3: cost=7  iters=500000  time=2.158s
+  best_cost=7
+  best_solution:
+5 3 4 2 7 8 9 1 7
+6 7 2 1 9 5 3 4 8
+1 9 8 6 3 4 5 6 2
+8 2 6 5 6 1 4 9 3
+4 5 9 8 4 3 7 2 1
+7 1 3 7 2 9 8 5 6
+9 6 1 3 5 7 2 8 4
+2 8 7 4 1 9 6 3 5
+3 4 5 6 8 2 1 7 9
+
+=== SA  puzzle=medium  runs=3 ===
+  run 1: cost=6  iters=500000  time=2.393s
+  run 2: cost=6  iters=500000  time=2.075s
+  run 3: cost=3  iters=500000  time=2.066s
+  best_cost=3
+  best_solution:
+4 8 3 9 2 1 6 7 5
+9 6 7 3 4 5 8 2 1
+2 5 1 8 7 6 4 9 3
+5 3 8 1 6 2 9 3 4
+7 2 9 5 3 4 7 1 8
+1 4 6 7 9 8 2 5 6
+3 1 2 6 8 9 5 4 7
+8 7 4 2 5 3 1 6 9
+6 9 5 4 1 7 3 8 2
+
+=== SA  puzzle=hard  runs=3 ===
+  run 1: cost=12  iters=500000  time=2.117s
+  run 2: cost=11  iters=500000  time=2.112s
+  run 3: cost=10  iters=500000  time=2.125s
+  best_cost=10
+  best_solution:
+4 6 1 2 3 9 8 7 5
+2 3 7 1 5 8 6 9 4
+9 5 8 7 6 4 2 3 1
+1 2 5 3 9 7 8 6 7
+3 4 6 5 8 2 4 1 9
+7 8 9 4 1 6 2 5 3
+8 9 2 6 4 3 1 7 5
+5 7 3 2 8 1 9 4 6
+1 6 4 9 7 5 3 2 8
+
+=== SA  puzzle=expert  runs=3 ===
+  run 1: cost=9  iters=500000  time=2.120s
+  run 2: cost=11  iters=500000  time=2.057s
+  run 3: cost=11  iters=500000  time=2.065s
+  best_cost=9
+  best_solution:
+1 5 4 9 8 7 2 9 6
+2 3 6 4 2 5 1 7 8
+8 7 9 6 3 1 5 4 3
+4 2 5 3 7 9 6 8 1
+7 1 9 5 8 6 4 3 2
+6 8 3 2 1 4 7 5 9
+3 6 2 7 5 8 4 1 9
+5 4 1 9 6 3 8 2 7
+8 9 7 1 4 2 3 6 5
+
+=== SA  puzzle=easy  runs=5 ===
+  run 1: cost=6  iters=300000  time=1.245s
+  run 2: cost=5  iters=300000  time=1.251s
+  run 3: cost=8  iters=300000  time=1.245s
+  run 4: cost=2  iters=300000  time=1.248s
+  run 5: cost=8  iters=300000  time=1.238s
+  best_cost=2
+  best_solution:
+5 3 2 6 7 8 4 1 9
+6 7 4 1 9 5 3 2 8
+1 9 8 3 4 2 5 6 7
+8 5 9 7 6 1 2 4 3
+4 2 6 8 5 3 7 9 1
+7 1 3 9 2 4 8 5 6
+9 6 1 5 3 7 2 8 4
+2 8 7 4 1 9 6 3 5
+3 4 5 2 8 6 1 7 9
+
+=== SA  puzzle=expert  runs=5 ===
+  run 1: cost=4  iters=300000  time=1.259s
+  run 2: cost=12  iters=300000  time=1.253s
+  run 3: cost=9  iters=300000  time=1.247s
+  run 4: cost=4  iters=300000  time=1.241s
+  run 5: cost=10  iters=300000  time=1.244s
+  best_cost=4
+  best_solution:
+1 6 2 8 4 7 7 9 3
+7 3 4 9 2 5 1 6 8
+8 5 9 6 3 1 5 2 4
+4 2 5 3 1 9 8 7 6
+9 1 3 7 8 6 4 5 2
+6 7 8 2 5 4 9 3 1
+3 8 6 4 7 2 2 1 9
+5 4 1 5 9 3 6 8 7
+2 9 7 1 6 8 3 4 5
+
+=== SA  puzzle=easy  runs=5 ===
+  run 1: SOLVED  iters=20503  time=0.086s
+  run 2: SOLVED  iters=15285  time=0.061s
+  run 3: SOLVED  iters=18330  time=0.074s
+  run 4: SOLVED  iters=17370  time=0.069s
+  run 5: SOLVED  iters=16030  time=0.065s
+  best_cost=0
+  best_solution:
+5 3 4 6 7 8 9 1 2
+6 7 2 1 9 5 3 4 8
+1 9 8 3 4 2 5 6 7
+8 5 9 7 6 1 4 2 3
+4 2 6 8 5 3 7 9 1
+7 1 3 9 2 4 8 5 6
+9 6 1 5 3 7 2 8 4
+2 8 7 4 1 9 6 3 5
+3 4 5 2 8 6 1 7 9
+
+=== SA  puzzle=expert  runs=5 ===
+  run 1: cost=2  iters=300000  time=1.191s
+  run 2: cost=2  iters=300000  time=1.183s
+  run 3: cost=2  iters=300000  time=1.189s
+  run 4: cost=2  iters=300000  time=1.193s
+  run 5: cost=2  iters=300000  time=1.183s
+  best_cost=2
+  best_solution:
+1 6 2 8 5 7 4 9 3
+5 3 4 9 2 1 7 6 8
+7 8 9 6 4 3 5 2 1
+2 7 5 3 1 9 8 4 6
+4 1 3 5 8 6 9 7 2
+6 9 8 2 7 4 1 3 5
+3 2 1 7 9 8 6 1 4
+9 4 6 1 3 5 2 8 7
+8 5 7 4 6 2 3 5 9
+
+=== SA  puzzle=hard  runs=3 ===
+  run 1: cost=2  iters=300000  time=1.190s
+  run 2: cost=2  iters=300000  time=1.197s
+  run 3: cost=2  iters=300000  time=1.173s
+  best_cost=2
+  best_solution:
+4 6 7 1 3 9 8 2 5
+2 3 1 8 6 5 7 4 9
+8 5 9 7 2 4 3 1 6
+3 2 5 4 9 7 1 6 8
+9 1 6 3 8 2 4 5 7
+7 4 8 5 1 6 2 9 3
+6 8 2 6 4 3 5 7 1
+5 9 3 2 7 1 9 8 4
+1 7 4 9 5 8 6 3 2
+
+=== SA  puzzle=medium  runs=5 ===
+  run 1: SOLVED  iters=165280  time=0.655s
+  run 2: SOLVED  iters=17548  time=0.071s
+  run 3: SOLVED  iters=95134  time=0.378s
+  run 4: SOLVED  iters=20627  time=0.083s
+  run 5: SOLVED  iters=19716  time=0.079s
+  best_cost=0
+  best_solution:
+4 8 3 9 2 1 6 5 7
+9 6 7 3 4 5 8 2 1
+2 5 1 8 7 6 4 9 3
+5 4 8 1 3 2 9 7 6
+7 2 9 5 6 4 1 3 8
+1 3 6 7 9 8 2 4 5
+3 7 2 6 8 9 5 1 4
+8 1 4 2 5 3 7 6 9
+6 9 5 4 1 7 3 8 2
+
+=== SA  puzzle=easy  runs=3 ===
+  run 1: SOLVED  iters=16577  time=0.069s
+  run 2: SOLVED  iters=19846  time=0.082s
+  run 3: SOLVED  iters=17536  time=0.071s
+  best_cost=0
+  best_solution:
+5 3 4 6 7 8 9 1 2
+6 7 2 1 9 5 3 4 8
+1 9 8 3 4 2 5 6 7
+8 5 9 7 6 1 4 2 3
+4 2 6 8 5 3 7 9 1
+7 1 3 9 2 4 8 5 6
+9 6 1 5 3 7 2 8 4
+2 8 7 4 1 9 6 3 5
+3 4 5 2 8 6 1 7 9
+
+=== SA  puzzle=medium  runs=3 ===
+  run 1: SOLVED  iters=97037  time=0.394s
+  run 2: SOLVED  iters=17820  time=0.073s
+  run 3: SOLVED  iters=19297  time=0.079s
+  best_cost=0
+  best_solution:
+4 8 3 9 2 1 6 5 7
+9 6 7 3 4 5 8 2 1
+2 5 1 8 7 6 4 9 3
+5 4 8 1 3 2 9 7 6
+7 2 9 5 6 4 1 3 8
+1 3 6 7 9 8 2 4 5
+3 7 2 6 8 9 5 1 4
+8 1 4 2 5 3 7 6 9
+6 9 5 4 1 7 3 8 2
+
+=== SA  puzzle=hard  runs=3 ===
+  run 1: cost=2  iters=300000  time=1.204s
+  run 2: cost=2  iters=300000  time=1.196s
+  run 3: cost=2  iters=300000  time=1.191s
+  best_cost=2
+  best_solution:
+4 1 7 3 6 9 8 2 5
+8 3 2 1 4 5 7 9 6
+6 9 5 7 2 8 1 4 3
+9 2 1 4 3 7 5 6 8
+3 5 6 9 8 2 4 1 7
+7 4 8 5 1 6 2 3 9
+2 8 9 6 5 3 6 7 4
+5 6 3 2 7 4 9 8 1
+1 7 4 8 9 1 3 5 2
+
+=== SA  puzzle=expert  runs=3 ===
+  run 1: SOLVED  iters=181798  time=0.732s
+  run 2: cost=2  iters=300000  time=1.198s
+  run 3: cost=2  iters=300000  time=1.213s
+  best_cost=0
+  best_solution:
+1 8 4 5 3 7 2 9 6
+5 3 6 9 2 1 4 7 8
+2 7 9 6 4 8 5 3 1
+7 2 5 3 6 9 1 8 4
+4 1 3 7 8 5 9 6 2
+6 9 8 2 1 4 7 5 3
+3 5 2 4 7 6 8 1 9
+9 4 1 8 5 3 6 2 7
+8 6 7 1 9 2 3 4 5
+
+=== SA  puzzle=killer  runs=3 ===
+  run 1: SOLVED  iters=97340  time=0.875s
+  run 2: SOLVED  iters=23311  time=0.212s
+  run 3: SOLVED  iters=99727  time=0.904s
+  best_cost=0
+  best_solution:
+5 4 3 7 6 8 9 1 2
+1 8 6 2 4 9 7 3 5
+9 2 7 1 5 3 4 8 6
+8 9 5 3 7 4 2 6 1
+4 7 1 8 2 6 5 9 3
+6 3 2 9 1 5 8 7 4
+7 5 4 6 8 1 3 2 9
+2 6 9 4 3 7 1 5 8
+3 1 8 5 9 2 6 4 7
+
+=== SA  puzzle=easy  runs=3 ===
+  run 1: SOLVED  iters=14163  time=0.061s
+  run 2: SOLVED  iters=24179  time=0.101s
+  run 3: SOLVED  iters=14589  time=0.062s
+  best_cost=0
+  best_solution:
+5 3 4 6 7 8 9 1 2
+6 7 2 1 9 5 3 4 8
+1 9 8 3 4 2 5 6 7
+8 5 9 7 6 1 4 2 3
+4 2 6 8 5 3 7 9 1
+7 1 3 9 2 4 8 5 6
+9 6 1 5 3 7 2 8 4
+2 8 7 4 1 9 6 3 5
+3 4 5 2 8 6 1 7 9
+
+=== SA  puzzle=medium  runs=3 ===
+  run 1: SOLVED  iters=20591  time=0.086s
+  run 2: SOLVED  iters=20348  time=0.085s
+  run 3: SOLVED  iters=91729  time=0.380s
+  best_cost=0
+  best_solution:
+4 8 3 9 2 1 6 5 7
+9 6 7 3 4 5 8 2 1
+2 5 1 8 7 6 4 9 3
+5 4 8 1 3 2 9 7 6
+7 2 9 5 6 4 1 3 8
+1 3 6 7 9 8 2 4 5
+3 7 2 6 8 9 5 1 4
+8 1 4 2 5 3 7 6 9
+6 9 5 4 1 7 3 8 2
+
+=== SA  puzzle=hard  runs=3 ===
+  run 1: cost=2  iters=300000  time=1.224s
+  run 2: cost=2  iters=300000  time=1.201s
+  run 3: cost=2  iters=300000  time=1.201s
+  best_cost=2
+  best_solution:
+4 6 7 3 2 1 8 9 5
+2 3 1 8 5 9 6 4 7
+9 5 8 7 6 4 1 3 2
+8 2 5 4 3 7 9 6 1
+7 1 9 5 8 6 4 2 3
+6 4 3 9 1 2 7 5 8
+3 8 2 6 4 3 5 7 9
+5 9 6 2 7 8 3 1 4
+1 7 4 1 9 5 2 8 6
+
+=== SA  puzzle=expert  runs=3 ===
+  run 1: cost=2  iters=300000  time=1.228s
+  run 2: cost=2  iters=300000  time=1.219s
+  run 3: SOLVED  iters=95647  time=0.385s
+  best_cost=0
+  best_solution:
+1 2 8 4 5 7 6 9 3
+5 3 6 9 2 1 4 7 8
+4 7 9 6 3 8 5 2 1
+2 8 5 3 7 9 1 4 6
+7 1 4 5 8 6 9 3 2
+6 9 3 2 1 4 7 8 5
+3 6 2 7 4 5 8 1 9
+9 4 1 8 6 3 2 5 7
+8 5 7 1 9 2 3 6 4
+
+=== SA  puzzle=killer  runs=3 ===
+  run 1: SOLVED  iters=169688  time=1.582s
+  run 2: SOLVED  iters=94096  time=0.870s
+  run 3: SOLVED  iters=94897  time=0.876s
+  best_cost=0
+  best_solution:
+2 6 4 9 7 5 3 8 1
+1 5 9 4 3 8 7 2 6
+8 3 7 6 1 2 5 4 9
+5 9 8 3 4 7 6 1 2
+7 4 1 8 2 6 9 3 5
+3 2 6 1 5 9 8 7 4
+6 7 3 2 9 4 1 5 8
+4 8 5 7 6 1 2 9 3
+9 1 2 5 8 3 4 6 7
