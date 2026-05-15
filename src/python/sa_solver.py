@@ -28,7 +28,6 @@ import argparse
 import math
 import random
 import time
-from pathlib import Path
 
 from board import Board, load_board, print_board, format_board, BOARD_SIZE, BOX_SIZE
 from puzzles import PUZZLES, OUTPUT_DIR
