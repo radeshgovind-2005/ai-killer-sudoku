@@ -35,6 +35,7 @@ from puzzles import PUZZLES, OUTPUT_DIR
 
 # ── Helpers ────────────────────────────────────────────────────────────────────
 
+
 def get_givens(board: Board) -> frozenset[int]:
     """Return flat indices of pre-filled (given) cells."""
     return frozenset(i for i, v in enumerate(board) if v != 0)
@@ -50,8 +51,11 @@ def initialize(board: Board, givens: frozenset[int]) -> Board:
     for box in range(BOARD_SIZE):
         sr = (box // BOX_SIZE) * BOX_SIZE
         sc = (box % BOX_SIZE) * BOX_SIZE
-        indices = [sr * BOARD_SIZE + r * BOARD_SIZE + sc + c
-                   for r in range(BOX_SIZE) for c in range(BOX_SIZE)]
+        indices = [
+            sr * BOARD_SIZE + r * BOARD_SIZE + sc + c
+            for r in range(BOX_SIZE)
+            for c in range(BOX_SIZE)
+        ]
         given_values = {result[i] for i in indices if i in givens}
         missing = list(set(range(1, 10)) - given_values)
         random.shuffle(missing)
@@ -69,7 +73,7 @@ def cost(board: Board) -> int:
     """
     violations = 0
     for i in range(BOARD_SIZE):
-        row_vals = board[i * BOARD_SIZE:(i + 1) * BOARD_SIZE]
+        row_vals = board[i * BOARD_SIZE : (i + 1) * BOARD_SIZE]
         col_vals = board[i::BOARD_SIZE]
         violations += BOARD_SIZE - len(set(row_vals))
         violations += BOARD_SIZE - len(set(col_vals))
@@ -79,21 +83,25 @@ def cost(board: Board) -> int:
 def neighbour(board: Board, givens: frozenset[int]) -> Board:
     """Swap two non-given cells within a random 3×3 box."""
     new_board = list(board)
-    for _ in range(100):           # safety: retry if chosen box has <2 mutable cells
+    for _ in range(100):  # safety: retry if chosen box has <2 mutable cells
         box = random.randrange(BOARD_SIZE)
         sr = (box // BOX_SIZE) * BOX_SIZE
         sc = (box % BOX_SIZE) * BOX_SIZE
-        indices = [sr * BOARD_SIZE + r * BOARD_SIZE + sc + c
-                   for r in range(BOX_SIZE) for c in range(BOX_SIZE)]
+        indices = [
+            sr * BOARD_SIZE + r * BOARD_SIZE + sc + c
+            for r in range(BOX_SIZE)
+            for c in range(BOX_SIZE)
+        ]
         mutable = [i for i in indices if i not in givens]
         if len(mutable) >= 2:
             i, j = random.sample(mutable, 2)
             new_board[i], new_board[j] = new_board[j], new_board[i]
             return new_board
-    return new_board               # fallback: unchanged (puzzle with few mutable cells)
+    return new_board  # fallback: unchanged (puzzle with few mutable cells)
 
 
 # ── Core algorithm ─────────────────────────────────────────────────────────────
+
 
 def simulated_annealing(
     board: Board,
@@ -135,7 +143,7 @@ def simulated_annealing(
             restarts += 1
             current = initialize(board, givens)
             current_cost = cost(current)
-            T = T_init * (0.5 ** restarts)  # each reheat starts cooler
+            T = T_init * (0.5**restarts)  # each reheat starts cooler
             stagnation = 0
 
         T *= cooling
@@ -146,14 +154,21 @@ def simulated_annealing(
 
 # ── CLI ────────────────────────────────────────────────────────────────────────
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Simulated Annealing Sudoku solver")
-    parser.add_argument("--puzzle", choices=list(PUZZLES), default="easy",
-                        help="Puzzle difficulty (default: easy)")
-    parser.add_argument("--runs", type=int, default=1,
-                        help="Number of independent runs (default: 1)")
-    parser.add_argument("--seed", type=int, default=None,
-                        help="Random seed for reproducibility")
+    parser.add_argument(
+        "--puzzle",
+        choices=list(PUZZLES),
+        default="easy",
+        help="Puzzle difficulty (default: easy)",
+    )
+    parser.add_argument(
+        "--runs", type=int, default=1, help="Number of independent runs (default: 1)"
+    )
+    parser.add_argument(
+        "--seed", type=int, default=None, help="Random seed for reproducibility"
+    )
     args = parser.parse_args()
 
     if args.seed is not None:
@@ -176,7 +191,9 @@ def main() -> None:
         solved = final_cost == 0
         results.append((solved, final_cost, iters, elapsed, best))
         status = "SOLVED" if solved else f"UNSOLVED (cost={final_cost})"
-        print(f"Run {run}/{args.runs}: {status} | iters={iters:,} | time={elapsed:.3f}s")
+        print(
+            f"Run {run}/{args.runs}: {status} | iters={iters:,} | time={elapsed:.3f}s"
+        )
 
     # Print the best result
     best_run = min(results, key=lambda r: r[1])
