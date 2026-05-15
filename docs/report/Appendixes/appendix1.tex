@@ -1,45 +1,79 @@
-\chapter{Applied Survival Analysis by Hosmer and Lemeshow} 
+\chapter{Estrutura do Repositório e Instruções de Execução}
 \label{anexo1}
-Stata Textbook Examples
-Applied Survival Analysis by Hosmer and Lemeshow \cite{newtest}
 
-The data files used for the examples in this text can be downloaded in a zip file from the Wiley FTP website or the Stata Web site.
+\section{Estrutura de Ficheiros}
+\label{sec:estrutura_ficheiros}
 
-\lstset{language=R,frame=none,numbers=left,escapechar=|,morekeywords={},caption=,label=code:newtest}
-\begin{lstlisting}    
-# The R package(s) needed for this chapter is the survival package. 
-# We currently use R 2.0.1 patched version. You may want to make sure 
-# that packages on your local machine are up to date. You can perform 
-# updating in R using update.packages() function.
+O repositório está organizado da seguinte forma:
 
-# url: http://www.ats.ucla.edu/stat/r/examples/
-# data set is hmohiv.csv.
-hmohiv<-read.table("http://www.ats.ucla.edu/stat/r/examples/asa/hmohiv.csv", sep=",", header = TRUE)
-attach(hmohiv)
-hmohiv
+\begin{verbatim}
+ai-killer-sudoku/
+  src/
+    prolog/
+      sudoku.pl         - Predicados base do Sudoku classico
+      dfid.pl           - Solucionador DFID com MRV
+      astar.pl          - Solucionador A* (h=celulas vazias)
+      killer_sudoku.pl  - Extensao Killer Sudoku (DFID + A*)
+    python/
+      board.py          - Representacao da grelha e utilitarios
+      puzzles.py        - Caminhos dos puzzles
+      sa_solver.py      - Solucionador SA
+      ga_solver.py      - Solucionador GA
+  data/
+    input/
+      classic_easy_01.txt
+      classic_medium_01.txt
+      classic_hard_01.txt
+      classic_expert_01.txt
+      killer_easy_01.txt
+    output/
+      benchmark_results.txt
+      sa_results.txt
+      ga_results.txt
+  scripts/
+    benchmark.sh        - Script de benchmark completo
+\end{verbatim}
 
-# using the hmohiv data set. To control the type of symbol, a variable called psymbol is created. 
-# It takes value 1 and 2, so the symbol type will be 1 and 2. 
-psymbol<-censor+1
-table(psymbol)
+\section{Instruções de Execução}
+\label{sec:instrucoes}
 
-plot(age, time, pch=(psymbol))
-legend(40, 60, c("Censor=1", "Censor=0"), pch=(psymbol))
+\paragraph{Requisitos.}
+SWI-Prolog (\texttt{swipl}) e Python 3.10+ devem estar instalados e disponíveis no \texttt{PATH}. Não são necessárias bibliotecas Python externas.
 
-age1<-1000/age
-plot(age1, time, pch=(psymbol))
-legend(40, 30, c("Censor=1", "Censor=0"), pch=(psymbol))
+\paragraph{Benchmark Completo.}
+Para executar todos os solucionadores em todos os puzzles e gerar o relatório de resultados:
+\begin{verbatim}
+  bash scripts/benchmark.sh
+\end{verbatim}
 
-# Package "survival" is needed for this analysis and for most of the analyses in the book.
-library(survival)
-test <- survreg( Surv(time, censor) ~ age, dist="exponential")
-summary(test)
+\paragraph{Solucionadores Prolog individualmente.}
+\begin{verbatim}
+  # DFID — puzzle fácil
+  swipl -q -s src/prolog/dfid.pl \
+        -g "solve_file('data/input/classic_easy_01.txt', _), halt"
 
-pred <- predict(test, type="response") 
-ord<-order(age)
-age_ord<-age[ord]
-pred_ord<-pred[ord]
-plot(age, time, pch=(psymbol))
-lines(age_ord, pred_ord)
-legend(40, 60, c("Censor=1", "Censor=0"), pch=(psymbol))
-\end{lstlisting}
+  # A* — puzzle especialista
+  swipl -q -s src/prolog/astar.pl \
+        -g "solve_file('data/input/classic_expert_01.txt', _), halt"
+
+  # Killer Sudoku (DFID + A*)
+  swipl -q -s src/prolog/killer_sudoku.pl \
+        -g "solve_killer_file(easy_01, _), halt"
+\end{verbatim}
+
+\paragraph{Solucionadores Python individualmente.}
+\begin{verbatim}
+  # SA — puzzle médio, 5 execuções
+  python3 src/python/sa_solver.py --puzzle medium --runs 5
+
+  # GA — puzzle fácil, população 300, 5000 gerações
+  python3 src/python/ga_solver.py --puzzle easy --pop 300 \
+          --generations 5000 --runs 3
+
+  # SA — Killer Sudoku
+  python3 src/python/sa_solver.py --puzzle killer --runs 3
+
+  # GA — Killer Sudoku
+  python3 src/python/ga_solver.py --puzzle killer --pop 200 \
+          --generations 10000 --runs 3
+\end{verbatim}
